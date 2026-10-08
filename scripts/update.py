@@ -2,15 +2,12 @@
 import concurrent.futures
 import datetime
 import json
-import os
 from pathlib import Path
 import subprocess
 import sys
-import urllib.request
 
 ROOT = Path(__file__).resolve().parents[1]
 DIST = ROOT / 'dist'
-SITE = 'https://kanna-keiba-notebook.sinteru.chatgpt.site/'
 DATE = datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).date().isoformat()
 
 def parse(path):
@@ -56,16 +53,17 @@ def update(kind):
 
 def main():
     DIST.mkdir(exist_ok=True)
-    # These are bundled public official snapshots, never browser-local user records.
-    for name in ('results-data.js', 'local-data.js', 'local-odds-data.js'):
+    # Bootstrap an independent official feed. Existing app/browser records stay
+    # in the app; no authentication or Site scraping is required by the runner.
+    seeds = {
+        'results-data.js': 'const RESULT_DATA={"races":[],"horses":[]};\n',
+        'local-data.js': 'const LOCAL_DATA=' + json.dumps({'year': int(DATE[:4]), 'snapshotDate': '', 'fetchedAt': '', 'source': '', 'schedule': [], 'races': [], 'horses': [], 'errors': []}) + ';\n',
+        'local-odds-data.js': 'Object.assign(ODDS_DATA,{});\n',
+    }
+    for name, content in seeds.items():
         path = DIST / name
         if not path.exists():
-            with urllib.request.urlopen(SITE + name, timeout=60) as response:
-                content = response.read()
-            temp = path.with_suffix('.tmp')
-            temp.write_bytes(content)
-            parse(temp)
-            temp.replace(path)
+            path.write_text(content)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
         results = list(pool.map(update, ('jra', 'nar')))
     print(json.dumps({'date': DATE, 'results': results}, ensure_ascii=False), flush=True)
