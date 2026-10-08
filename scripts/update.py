@@ -65,9 +65,9 @@ def main():
         if not path.exists():
             path.write_text(content)
     with concurrent.futures.ThreadPoolExecutor(max_workers=2) as pool:
-        results = list(pool.map(update, ('jra', 'nar')))
+        results = list(pool.map(update, ('jra',)))
     feed = {'version': 1, 'checkedAt': datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(timespec='seconds'), 'date': DATE, 'results': results,
-            'jra': parse(DIST / 'results-data.js'), 'nar': parse(DIST / 'local-data.js'), 'narOdds': parse(DIST / 'local-odds-data.js')}
+            'jra': parse(DIST / 'results-data.js'), 'nar': {'races': [], 'horses': [], 'schedule': []}, 'narOdds': {}}
     (DIST / 'feed.json').write_text(json.dumps(feed, ensure_ascii=False, separators=(',', ':')) + '\n')
     print(json.dumps({'date': DATE, 'results': results}, ensure_ascii=False), flush=True)
     if any(not r['success'] for r in results):
