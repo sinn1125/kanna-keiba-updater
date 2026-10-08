@@ -1,0 +1,1 @@
+# kanna-keiba-updater
