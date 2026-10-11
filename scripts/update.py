@@ -27,7 +27,9 @@ def verify(path):
     for r in races:
         datetime.date.fromisoformat(r['date'])
         assert r['status'] in ('entries', 'results')
-        hs = [h for h in horses if h['raceId'] == r['id']]
+        # Keep a withdrawn horse's stable ID and notes, but do not count it
+        # among the currently listed runners.
+        hs = [h for h in horses if h['raceId'] == r['id'] and h.get('entryState') != 'not_listed']
         assert len(hs) == int(r['field']), ('Incomplete field', r['id'])
         if r['status'] == 'entries':
             assert not r.get('payouts')

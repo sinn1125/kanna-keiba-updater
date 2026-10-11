@@ -78,13 +78,16 @@ def parse_meeting(label, cname):
             # A name-derived key is still stable when the draw is assigned.
             identity_key = identity[1] if identity else "name" + hashlib.sha256(horse_name.encode()).hexdigest()[:14]
             number_text = cell(row, "num").text()
-            frame_text = cell(row, "waku").text()
+            frame_cell = cell(row, "waku")
+            frame_image = frame_cell.first("img")
+            frame_text = frame_cell.text() or frame_image.a.get("alt", "")
+            frame_match = re.search(r"(\d+)", frame_text)
             odds_text = cell(row, "odds").text()
             win_odds = float(odds_text) if re.fullmatch(r"\d+(?:\.\d+)?", odds_text) else None
             horses.append({"id": rid + "-horse-" + identity_key, "raceId": rid,
                            "horseCname": horse_cname if identity else "", "name": horse_name,
                            "number": number_text if number_text.isdigit() else "",
-                           "frame": int(frame_text) if frame_text.isdigit() else None,
+                           "frame": int(frame_match[1]) if frame_match else None,
                            "jockey": cell(row, "jockey").text(), "trainer": cell(row, "trainer").text(),
                            "load": cell(row, "weight").text().replace("kg", ""),
                            "age": cell(row, "age").text(), "weight": cell(row, "h_weight").text(),
@@ -115,13 +118,29 @@ def main():
     fresh_races = [r for rs, _ in batches for r in rs]
     fresh_horses = [h for _, hs in batches for h in hs]
     target_dates = sorted({r["date"] for r in fresh_races})
-    if len(fresh_races) != len(meetings) * 12 or len({h["id"] for h in fresh_horses}) != len(fresh_horses):
+    if "--through" in sys.argv:
+        through = sys.argv[sys.argv.index("--through") + 1]
+        datetime.fromisoformat(through)
+        fresh_races = [r for r in fresh_races if r["date"] <= through]
+        ids = {r["id"] for r in fresh_races}
+        fresh_horses = [h for h in fresh_horses if h["raceId"] in ids]
+        target_dates = sorted({r["date"] for r in fresh_races})
+    if ("--through" not in sys.argv and len(fresh_races) != len(meetings) * 12) or len({h["id"] for h in fresh_horses}) != len(fresh_horses):
         raise ValueError("Incomplete or duplicated official entries")
     target = ROOT / "dist/results-data.js"
     before = target.read_text()
     payload = json.loads(before.removeprefix("const RESULT_DATA=").strip().rstrip(";"))
     old_races = {r["id"]: r for r in payload["races"]}
     old_horses = {h["id"]: h for h in payload["horses"]}
+    refreshed_race_ids = {r["id"] for r in fresh_races}
+    refreshed_horse_ids = {h["id"] for h in fresh_horses}
+    # Keep the stable horse ID and any saved notes if a horse disappears from
+    # the latest official entry sheet, but do not count or number it as a starter.
+    for old in old_horses.values():
+        if (old["raceId"] in refreshed_race_ids and old["id"] not in refreshed_horse_ids
+                and old_races.get(old["raceId"], {}).get("status") != "results" and not old.get("finish")):
+            old.update({"number": "", "frame": None, "winOdds": None,
+                        "oddsState": "unpublished", "entryState": "not_listed"})
     for r in fresh_races:
         old = old_races.get(r["id"], {})
         if old.get("status") == "results":
@@ -131,10 +150,11 @@ def main():
         old_races[r["id"]] = {**old, **r}
     for h in fresh_horses:
         old = old_horses.get(h["id"], {})
-        if old.get("finish"):
+        if old.get("finish") or old_races.get(h["raceId"], {}).get("status") == "results":
             continue
         old_horses[h["id"]] = {**h, **{k: v for k, v in old.items() if k not in ("number", "frame", "weight", "winOdds", "oddsState", "jockey", "trainer", "load", "age")}}
         old_horses[h["id"]].update({k: h[k] for k in ("number", "frame", "weight", "winOdds", "oddsState", "jockey", "trainer", "load", "age")})
+        old_horses[h["id"]]["entryState"] = "listed"
     assert len(old_races) == len(set(old_races)) and len(old_horses) == len(set(old_horses))
     after = "const RESULT_DATA=" + json.dumps({"races": list(old_races.values()), "horses": list(old_horses.values())}, ensure_ascii=False, separators=(",", ":")) + ";\n"
     if before != after:
