@@ -6,6 +6,7 @@ result or final odds from an unconfirmed entry or an earlier race.
 import importlib.util
 import concurrent.futures
 import json
+import copy
 import re
 import sys
 from datetime import datetime, timezone, timedelta
@@ -84,6 +85,13 @@ def main():
     month = p.tree(p.request_jra("S", month_cname))
     meetings = [(label, cn) for label, cn in links(month, "pw01srl1") if date.replace("-", "") in cn]
     updates = []
+    if not meetings and '--seed' not in sys.argv:
+        # This is the current-results navigation link observed on JRA.
+        current = p.request_jra('S', 'pw01sli00/AF')
+        observed = re.findall(r"pw01sde01\d+/[A-F0-9]{2}", current)
+        seed = next((cn for cn in observed if date.replace('-', '') in cn), None)
+        if seed:
+            sys.argv.extend(['--seed', seed])
     if meetings:
         for label, cname in meetings:
             day = p.tree(p.request_jra("S", cname))
@@ -146,7 +154,7 @@ def main():
     for rid, result, rows in updates:
         if rid not in races:
             raise ValueError(f"Result has no registered race: {rid}")
-        listed = [h for h in horses.values() if h['raceId'] == rid]
+        listed = [copy.deepcopy(h) for h in horses.values() if h['raceId'] == rid]
         active_ids = {h['id'] for h in listed if h.get('entryState') != 'not_listed'}
         by_number = {h.get('number'): h for h in listed if h.get('number')}
         by_name = {normalize(h['name']): h for h in listed}
@@ -171,7 +179,11 @@ def main():
                           "jockey": row.first("td", "jockey").text(), "trainer": row.first("td", "trainer").text(),
                           "isRecord": "レコード" in clock})
         if not active_ids.issubset(matched):
-            raise ValueError(f"{rid}: official results matched {len(active_ids & matched)} of {len(active_ids)} listed entries")
+            print(f"PENDING {rid}: complete results unavailable ({len(active_ids & matched)}/{len(active_ids)} entries)")
+            continue
+        for horse in listed:
+            horses[horse['id']] = horse
+        data['horses'] = list(horses.values())
         old = races[rid]
         if all(old.get(k) == v for k, v in result.items() if k != 'fetchedAt'):
             result['fetchedAt'] = old.get('fetchedAt', result['fetchedAt'])
@@ -185,3 +197,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+

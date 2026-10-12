@@ -84,16 +84,20 @@ def parse_meeting(label, cname):
             frame_match = re.search(r"(\d+)", frame_text)
             odds_text = cell(row, "odds").text()
             win_odds = float(odds_text) if re.fullmatch(r"\d+(?:\.\d+)?", odds_text) else None
+            body_weight_text = cell(row, "h_weight").text()
+            body_weight = re.fullmatch(r"(\d+)\s*(?:kg)?\s*(\([^)]*\))?", body_weight_text)
+            withdrawn = next((word for word in ('取消','除外') if word in row.text()), '')
             horses.append({"id": rid + "-horse-" + identity_key, "raceId": rid,
                            "horseCname": horse_cname if identity else "", "name": horse_name,
                            "number": number_text if number_text.isdigit() else "",
                            "frame": int(frame_match[1]) if frame_match else None,
                            "jockey": cell(row, "jockey").text(), "trainer": cell(row, "trainer").text(),
                            "load": cell(row, "weight").text().replace("kg", ""),
-                           "age": cell(row, "age").text(), "weight": cell(row, "h_weight").text(),
+                           "age": cell(row, "age").text(), "weight": body_weight[1] if body_weight else body_weight_text,
+                           "weightChange": body_weight[2] if body_weight and body_weight[2] else "",
                            "winOdds": win_odds, "oddsState": "current" if win_odds is not None else "unpublished",
                            "mark": "", "note": "", "history": [], "historyComplete": False,
-                           "finish": "", "passing": "", "last3f": "", "time": "", "margin": ""})
+                           "finish": withdrawn, "entryState":"cancelled" if withdrawn else "listed", "passing": "", "last3f": "", "time": "", "margin": ""})
     if len({r["id"] for r in races}) != len(races) or len({h["id"] for h in horses}) != len(horses):
         raise ValueError(f"{label}: duplicate race or horse ID")
     print(label, len(races), "races", len(horses), "horses", flush=True)
@@ -118,6 +122,13 @@ def main():
     fresh_races = [r for rs, _ in batches for r in rs]
     fresh_horses = [h for _, hs in batches for h in hs]
     target_dates = sorted({r["date"] for r in fresh_races})
+    if '--date' in sys.argv:
+        target_date = sys.argv[sys.argv.index('--date')+1]
+        datetime.fromisoformat(target_date)
+        fresh_races = [r for r in fresh_races if r['date']==target_date]
+        ids = {r['id'] for r in fresh_races}
+        fresh_horses = [h for h in fresh_horses if h['raceId'] in ids]
+        target_dates = sorted({r['date'] for r in fresh_races})
     if "--through" in sys.argv:
         through = sys.argv[sys.argv.index("--through") + 1]
         datetime.fromisoformat(through)
@@ -125,7 +136,7 @@ def main():
         ids = {r["id"] for r in fresh_races}
         fresh_horses = [h for h in fresh_horses if h["raceId"] in ids]
         target_dates = sorted({r["date"] for r in fresh_races})
-    if ("--through" not in sys.argv and len(fresh_races) != len(meetings) * 12) or len({h["id"] for h in fresh_horses}) != len(fresh_horses):
+    if ("--through" not in sys.argv and '--date' not in sys.argv and len(fresh_races) != len(meetings) * 12) or len({h["id"] for h in fresh_horses}) != len(fresh_horses):
         raise ValueError("Incomplete or duplicated official entries")
     target = ROOT / "dist/results-data.js"
     before = target.read_text()
@@ -152,9 +163,13 @@ def main():
         old = old_horses.get(h["id"], {})
         if old.get("finish") or old_races.get(h["raceId"], {}).get("status") == "results":
             continue
-        old_horses[h["id"]] = {**h, **{k: v for k, v in old.items() if k not in ("number", "frame", "weight", "winOdds", "oddsState", "jockey", "trainer", "load", "age")}}
-        old_horses[h["id"]].update({k: h[k] for k in ("number", "frame", "weight", "winOdds", "oddsState", "jockey", "trainer", "load", "age")})
-        old_horses[h["id"]]["entryState"] = "listed"
+        old_horses[h["id"]] = {**h, **{k: v for k, v in old.items() if k not in ("number", "frame", "weight", "weightChange", "winOdds", "oddsState", "jockey", "trainer", "load", "age")}}
+        old_horses[h["id"]].update({k: h[k] for k in ("number", "frame", "weight", "weightChange", "winOdds", "oddsState", "jockey", "trainer", "load", "age")})
+        for key in ('number','frame','weight','weightChange','winOdds','jockey','trainer','load','age'):
+            if h.get(key) in ('',None) and old.get(key) not in ('',None) and not h['finish']:
+                old_horses[h['id']][key] = old[key]
+        old_horses[h["id"]]["entryState"] = h['entryState']
+        if h['finish']:old_horses[h['id']]['finish']=h['finish']
     assert len(old_races) == len(set(old_races)) and len(old_horses) == len(set(old_horses))
     after = "const RESULT_DATA=" + json.dumps({"races": list(old_races.values()), "horses": list(old_horses.values())}, ensure_ascii=False, separators=(",", ":")) + ";\n"
     if before != after:
