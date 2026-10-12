@@ -23,6 +23,8 @@ class Protections(unittest.TestCase):
         self.assertIsNone(odds.numbers('取消'))
         self.assertIsNone(odds.numbers('未発表'))
     def test_pair_and_triple_tables(self):
+        frame='<table class="waku"><caption><img alt="枠1白"></caption><tbody><tr><th>2</th><td>41.1</td></tr></tbody></table>'
+        self.assertEqual(odds.parse_market(frame,'waku'),{'1-2':[41.1]})
         html='<table class="wide"><caption>1</caption><tbody><tr><th>2</th><td>21.1-22.5</td></tr></tbody></table>'
         self.assertEqual(odds.parse_market(html,'wide'),{'1-2':[21.1,22.5]})
         html='<table class="tan3 pop"><tbody><tr><td class="num">9-1-18</td><td class="odds">112.3</td></tr></tbody></table>'

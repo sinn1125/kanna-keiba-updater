@@ -38,7 +38,11 @@ def parse_market(html, cls):
                 if re.fullmatch(r'\d+-\d+-\d+',key) and value:
                     result[key] = value
         else:
-            key = table.first('caption').text()
+            caption = table.first('caption')
+            key = caption.text()
+            if cls=='waku' and not key:
+                frame = re.search(r'枠(\d+)',caption.first('img').a.get('alt',''))
+                key = frame[1] if frame else ''
             if not re.fullmatch(r'\d+(?:-\d+)?',key):
                 continue
             for row in table.first('tbody').all('tr'):
