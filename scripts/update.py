@@ -39,16 +39,32 @@ def verify(path):
             assert not any(str(h.get('finish', '')).isdigit() for h in hs)
 
 def update(kind):
-    names = ['results-data.js', 'jra-odds.json']
+    names = ['results-data.js', 'jra-odds.json', 'jra-forecasts.json']
     old = {name: (DIST / name).read_bytes() if (DIST / name).exists() else None for name in names}
     try:
         run('scripts/import-jra-entries.py', '--date', DATE)
+        run('scripts/refresh-jra-entry-histories.py', DATE)
+        run('scripts/forecast-current-jra.py', DATE)
         run('scripts/import-jra-results.py', DATE)
         run('scripts/import-jra-odds.py', DATE)
         verify(DIST / 'results-data.js')
         previous = json.loads(old['results-data.js'].decode().split('=',1)[1].rstrip(';\n'))
         fresh = parse(DIST/'results-data.js')
         verify_preservation(previous, fresh, DATE)
+        forecasts = json.loads((DIST/'jra-forecasts.json').read_text())
+        by_race = {r['id']:r for r in fresh['races'] if r['date']==DATE}
+        by_horse = {h['id']:h for h in fresh['horses']}
+        assert set(by_race) <= set(forecasts), 'Missing AI forecast for a race'
+        for rid, race in by_race.items():
+            hs = [h for h in fresh['horses'] if h['raceId']==rid and h.get('entryState')!='not_listed']
+            assert len(hs)==race['field'] and all(h.get('historyComplete') for h in hs), ('Incomplete profiles',rid)
+            forecast = forecasts[rid]
+            assert set(forecast['items'])=={h['id'] for h in hs}, ('Forecast runners',rid)
+            assert forecast.get('forecastKind') in ('pre-race','retrospective'), ('Forecast provenance',rid)
+            for item in forecast['items'].values():
+                for prior in item['evidence']['recent']:
+                    assert prior['date']<DATE, ('Future run in AI',rid)
+                    assert all(x['next'] is None or x['next']['date']<DATE for x in prior['rivals']), ('Future rival result',rid)
         odds = json.loads((DIST/'jra-odds.json').read_text())
         assert set(odds['odds']).issubset({r['id'] for r in fresh['races']}), 'Unknown odds race'
         for markets in odds['odds'].values():
@@ -57,7 +73,9 @@ def update(kind):
         return {'organization': kind, 'success': True, 'changed': any(old[n] != (DIST/n).read_bytes() for n in names),
                 'races':len(fresh['races']), 'horses':len(fresh['horses']),
                 'confirmedToday':sum(r['date']==DATE and r['status']=='results' for r in fresh['races']),
-                'oddsValues':sum(len(v) for m in odds['odds'].values() for v in m.values())}
+                'oddsValues':sum(len(v) for m in odds['odds'].values() for v in m.values()),
+                'profilesComplete':sum(h.get('historyComplete') is True for h in fresh['horses'] if h['raceId'] in by_race),
+                'forecasts':len(by_race),'forecastPredicted':sum(forecasts[r]['status']=='predicted' for r in by_race)}
     except Exception as error:
         for name, content in old.items():
             if content is None:(DIST/name).unlink(missing_ok=True)
@@ -104,10 +122,11 @@ def main():
     results = [update('jra')]
     odds = json.loads((DIST/'jra-odds.json').read_text()) if (DIST/'jra-odds.json').exists() else {'odds':{},'meta':{}}
     feed = {'version': 1, 'checkedAt': datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(timespec='seconds'), 'date': DATE, 'results': results,
-            'jra': parse(DIST / 'results-data.js'), 'jraOdds':odds['odds'], 'jraOddsMeta':odds['meta']}
+            'jra': parse(DIST / 'results-data.js'), 'jraOdds':odds['odds'], 'jraOddsMeta':odds['meta'],
+            'jraForecasts':json.loads((DIST/'jra-forecasts.json').read_text()) if (DIST/'jra-forecasts.json').exists() else {}}
     feed_path = DIST/'feed.json'
     before = json.loads(feed_path.read_text()) if feed_path.exists() else {}
-    meaningful = lambda f:{k:f.get(k) for k in ('date','jra','jraOdds','jraOddsMeta','results')}
+    meaningful = lambda f:{k:f.get(k) for k in ('date','jra','jraOdds','jraOddsMeta','jraForecasts','results')}
     if meaningful(before)!=meaningful(feed):feed_path.write_text(json.dumps(feed,ensure_ascii=False,separators=(',',':'))+'\n')
     report = {'date':DATE,'checkedAt':feed['checkedAt'],'results':results,'event':os.environ.get('GITHUB_EVENT_NAME','local')}
     (ROOT/'update-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))

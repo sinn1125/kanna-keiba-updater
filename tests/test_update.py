@@ -29,10 +29,10 @@ class Protections(unittest.TestCase):
         self.assertEqual(odds.parse_market(html,'wide'),{'1-2':[21.1,22.5]})
         html='<table class="tan3 pop"><tbody><tr><td class="num">9-1-18</td><td class="odds">112.3</td></tr></tbody></table>'
         self.assertEqual(odds.parse_market(html,'tan3'),{'9-1-18':[112.3]})
-    def test_49_scheduled_slots(self):
+    def test_49_scheduled_slots_on_any_official_meeting_day(self):
         text=(ROOT/'.github/workflows/update.yml').read_text()
-        self.assertIn("'*/10 0-7 * * 6,0,1'",text)
-        self.assertIn("'0 8 * * 6,0,1'",text)
+        self.assertIn("'*/10 0-7 * * *'",text)
+        self.assertIn("'0 8 * * *'",text)
         slots=[(h+9,m) for h in range(8) for m in range(0,60,10)]+[(17,0)]
         self.assertEqual(len(slots),49)
         self.assertEqual(slots[0],(9,0));self.assertEqual(slots[-1],(17,0))

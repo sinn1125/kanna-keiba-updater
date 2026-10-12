@@ -1,10 +1,10 @@
 name: Official racing data update
 on:
   schedule:
-    # UTC: Sat/Sun/Mon 00:00–07:50 = JST 09:00–16:50, then 17:00.
-    # 48 + 1 = 49 scheduled starts/day. Non-meeting Mondays exit after discovery.
-    - cron: '*/10 0-7 * * 6,0,1'
-    - cron: '0 8 * * 6,0,1'
+    # Daily UTC 00:00–08:00 = JST 09:00–17:00. The official JRA
+    # date links decide whether a meeting exists, including weekday holidays.
+    - cron: '*/10 0-7 * * *'
+    - cron: '0 8 * * *'
   workflow_dispatch:
   push:
     paths:
@@ -27,16 +27,15 @@ jobs:
       - uses: actions/setup-python@v5
         with:
           python-version: '3.12'
-      - uses: actions/cache@v4
-        with:
-          path: |
-            ../profile-cache
-          key: official-cache-${{ github.run_id }}
-          restore-keys: official-cache-
       - name: Test central update protections
         run: python -m unittest discover -s tests
       - name: Fetch and verify central racing data
-        run: python scripts/update.py
+        run: |
+          for attempt in 1 2 3; do
+            python scripts/update.py && exit 0
+            if [ "$attempt" = 3 ]; then exit 1; fi
+            sleep 15
+          done
       - name: Keep update diagnostics
         if: always()
         uses: actions/upload-artifact@v4
@@ -46,7 +45,6 @@ jobs:
           if-no-files-found: ignore
           retention-days: 7
       - name: Commit verified data
-        if: always()
         run: |
           if [ ! -d dist ]; then exit 0; fi
           git add dist/
