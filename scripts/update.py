@@ -128,6 +128,11 @@ def main():
     before = json.loads(feed_path.read_text()) if feed_path.exists() else {}
     meaningful = lambda f:{k:f.get(k) for k in ('date','jra','jraOdds','jraOddsMeta','jraForecasts','results')}
     if meaningful(before)!=meaningful(feed):feed_path.write_text(json.dumps(feed,ensure_ascii=False,separators=(',',':'))+'\n')
+    # Only public JRA entry fields reach the separate read-only race-card Site.
+    spec = importlib.util.spec_from_file_location('public_racecards', ROOT/'scripts/public-racecards.py')
+    racecard_builder = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(racecard_builder)
+    racecard_builder.write_public_racecards(json.loads(feed_path.read_text()), DIST/'public-racecards.json')
     report = {'date':DATE,'checkedAt':feed['checkedAt'],'results':results,'event':os.environ.get('GITHUB_EVENT_NAME','local')}
     (ROOT/'update-report.json').write_text(json.dumps(report,ensure_ascii=False,indent=2))
     if os.environ.get('GITHUB_STEP_SUMMARY'):

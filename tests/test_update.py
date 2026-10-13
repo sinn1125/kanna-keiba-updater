@@ -9,6 +9,7 @@ def module(name,file):
     result=importlib.util.module_from_spec(spec);spec.loader.exec_module(result);return result
 update=module('update','update.py')
 odds=module('odds','import-jra-odds.py')
+public=module('public_racecards','public-racecards.py')
 
 class Protections(unittest.TestCase):
     def test_preserves_ids_notes_and_history(self):
@@ -36,5 +37,15 @@ class Protections(unittest.TestCase):
         slots=[(h+9,m) for h in range(8) for m in range(0,60,10)]+[(17,0)]
         self.assertEqual(len(slots),49)
         self.assertEqual(slots[0],(9,0));self.assertEqual(slots[-1],(17,0))
+    def test_public_racecards_exclude_private_and_prediction_fields(self):
+        feed={'version':1,'checkedAt':'2026-10-13T12:00:00+09:00','jra':{
+            'races':[{'id':'jra-test','date':'2026-10-13','course':'東京','number':1,'name':'競走','field':1,'status':'entries','payouts':[999], 'secret':'hidden'}],
+            'horses':[{'id':'jra-h','raceId':'jra-test','name':'試験馬','number':'1','frame':1,'mark':'◎','note':'個人メモ','history':[{'date':'2026-01-01'}]}]},
+            'jraForecasts':{'jra-test':{'private':'prediction'}},'jraOdds':{'jra-test':{'単勝':{}}}}
+        result=public.racecards(feed)
+        self.assertEqual(result['jra']['races'][0]['name'],'競走')
+        self.assertEqual(result['jra']['horses'][0]['name'],'試験馬')
+        for word in ('個人メモ','prediction','payouts','history','secret','jraOdds','"mark"'):
+            self.assertNotIn(word,str(result))
 
 if __name__=='__main__':unittest.main()
