@@ -95,19 +95,19 @@ def predict(info, target, hs):
         x,ev=g['analyse'](hid,r,styles,True)
         latest=sorted((z['date'] for z in h['history'] if z['date']<r['date'] and not any(w in str(z.get('finish','')) for w in ('取消','除外'))),reverse=True)[:5]
         observed=[z['date'] for z in ev['recent']]
-        eligible=bool(observed) and observed==latest and h.get('finish') not in ('取消','除外')
+        eligible=bool(observed) and observed==latest and h.get('finish') not in ('取消','除外') and h.get('entryState') not in ('cancelled','not_listed')
         item={'mark':'','winScore':probability(x,'win') if eligible else None,
               'placeScore':probability(x,'place') if eligible else None,
               'podiumScore':probability(x,'podium') if eligible else None,
-              'evidence':ev,'features':x,'number':int(h['number'])}
+              'evidence':ev,'features':x,'number':int(h['number']) if str(h.get('number','')).isdigit() else None}
         items[h['id']]=item
         if eligible:available.append((h['id'],item))
         else:withheld.append(h['name'])
         if any(z['date']>=r['date'] for z in ev['recent']):raise ValueError('Post-race data in forecast')
     ranked=[]
     if len(available)>=max(2,math.ceil(len(hs)/2)):
-        first=max(available,key=lambda z:(z[1]['winScore'],-z[1]['number']));first[1]['mark']='◎';ranked=[first[0]]
-        rest=sorted((z for z in available if z[0]!=first[0]),key=lambda z:(-z[1]['placeScore'],z[1]['number']))
+        first=max(available,key=lambda z:(z[1]['winScore'],-(z[1]['number'] or 999)));first[1]['mark']='◎';ranked=[first[0]]
+        rest=sorted((z for z in available if z[0]!=first[0]),key=lambda z:(-z[1]['placeScore'],z[1]['number'] or 999))
         for (hid,x),mark in zip(rest[:4],('○','▲','△','△')):x['mark']=mark;ranked.append(hid)
     return {'asOf':info['date'],'group':group,'status':'predicted' if ranked else 'insufficient',
             'unknownHorses':len(withheld),'items':items,'ranked':ranked},withheld
