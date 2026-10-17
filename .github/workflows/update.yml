@@ -9,6 +9,7 @@ on:
   push:
     paths:
       - 'scripts/**'
+      - 'tests/**'
       - '.github/workflows/update.yml'
 permissions:
   contents: write
@@ -39,6 +40,7 @@ jobs:
         run: python scripts/update.py
       - name: Keep update diagnostics
         if: always()
+        continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
           name: update-report-${{ github.run_id }}
@@ -54,7 +56,13 @@ jobs:
           git config user.name 'kanna-keiba-updater[bot]'
           git config user.email 'kanna-keiba-updater@users.noreply.github.com'
           git commit -m 'Update verified official racing snapshots'
-          git push
+          # Retry a transient transport error; never force or merge an older
+          # snapshot over a concurrent update. A conflict retries next run.
+          for attempt in 1 2 3; do
+            git push && exit 0
+            sleep 2
+          done
+          exit 1
 
       - name: Report incomplete update
         if: steps.fetch.outcome == 'failure'
