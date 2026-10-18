@@ -81,6 +81,17 @@ def verify_odds():
     for markets in odds['odds'].values():
         for values in markets.values():
             assert all(isinstance(v,list) and 1<=len(v)<=2 and all(isinstance(n,(int,float)) and not isinstance(n,bool) and n>0 and n<float('inf') for n in v) for v in values.values()), 'Invalid odds'
+    races={r['id']:r for r in fresh['races']}
+    for rid,markets in odds.get('preRace',{}).items():
+        assert rid in races and isinstance(markets,dict), 'Unknown pre-start odds race'
+        race=races[rid]
+        assert race.get('startTime'), 'Missing official start time'
+        start=datetime.datetime.fromisoformat(race['date']+'T'+race['startTime']).replace(tzinfo=datetime.timezone(datetime.timedelta(hours=9)))
+        for market,record in markets.items():
+            observed=datetime.datetime.fromisoformat(record['observedAt'])
+            assert observed.tzinfo and observed<start and observed.date()==start.date(), ('Post-start odds',rid,market)
+            assert record['source'].startswith('https://www.jra.go.jp/JRADB/accessO.html?CNAME='), ('Non-JRA odds source',rid,market)
+            assert record['odds'] and all(isinstance(v,list) and 1<=len(v)<=2 and all(isinstance(n,(int,float)) and not isinstance(n,bool) and 0<n<float('inf') for n in v) for v in record['odds'].values()), ('Invalid pre-start odds',rid,market)
 
 def feed_forecasts(data, forecasts):
     """Do not publish a saved prediction against a changed/missing runner list."""
@@ -225,4 +236,3 @@ if __name__ == '__main__':
         atomic_write(ROOT/'update-report.json',json.dumps(report,ensure_ascii=False,indent=2))
         print(json.dumps(report,ensure_ascii=False),flush=True)
         sys.exit(1)
-
