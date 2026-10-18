@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-18",
-  "checkedAt": "2026-10-18T16:17:10+09:00",
+  "checkedAt": "2026-10-18T16:21:39+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -41,10 +41,7 @@
     "jra-2026-10-18-niigata-11",
     "jra-2026-10-18-niigata-12"
   ],
-  "newlyConfirmedRaces": [
-    "jra-2026-10-18-kyoto-11",
-    "jra-2026-10-18-niigata-12"
-  ],
+  "newlyConfirmedRaces": [],
   "pendingRaces": [
     "jra-2026-10-18-tokyo-12",
     "jra-2026-10-18-kyoto-12"
@@ -86,5 +83,5 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604021120261018%2F85",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604021220261018%2F3A"
   ],
-  "completedAt": "2026-10-18T16:17:39+09:00"
+  "completedAt": "2026-10-18T16:22:08+09:00"
 }
