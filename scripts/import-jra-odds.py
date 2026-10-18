@@ -108,6 +108,35 @@ def read_race(cname, date):
             errors.append({'raceId':rid,'market':typ,'error':str(error)})
     return rid,odds,{'sources':sources,'coverage':coverage,'fetchedAt':datetime.now(JST).isoformat(timespec='seconds')},errors
 
+def remember_pre_start(old, race, rid, values, meta):
+    """Keep each market's last observed pre-start odds for later causal tests.
+
+    A missing market never borrows a post-start price. This is a single compact
+    snapshot per race and market, replaced only by a newer official observation.
+    """
+    if not race or not values or not race.get('startTime'):
+        return 0
+    try:
+        start=datetime.fromisoformat(race['date']+'T'+race['startTime']).replace(tzinfo=JST)
+        observed=datetime.fromisoformat(meta['fetchedAt'])
+    except (TypeError,ValueError):
+        return 0
+    if observed.tzinfo is None or observed>=start or observed.date()!=start.date():
+        return 0
+    markets=old.setdefault('preRace',{}).setdefault(rid,{})
+    saved=0
+    for typ,priced in values.items():
+        source=meta.get('sources',{}).get(typ)
+        if not source or not priced:
+            continue
+        previous=markets.get(typ,{})
+        if previous.get('observedAt','')>=meta['fetchedAt']:
+            continue
+        markets[typ]={'observedAt':meta['fetchedAt'],'odds':priced,
+                      'source':source,'coverage':meta.get('coverage',{}).get(typ,'official-listed')}
+        saved+=1
+    return saved
+
 def main():
     date = sys.argv[1] if len(sys.argv)>1 else datetime.now(JST).date().isoformat()
     index = p.request_jra('O','pw15oli00/6D')
@@ -119,6 +148,9 @@ def main():
     jobs = list(dict.fromkeys(jobs))
     target = ROOT/'dist/jra-odds.json'
     old = json.loads(target.read_text()) if target.exists() else {'odds':{},'meta':{}}
+    results=ROOT/'dist/results-data.js'
+    published=json.loads(results.read_text().split('=',1)[1].rstrip(';\n')) if results.exists() else {'races':[]}
+    race_index={r['id']:r for r in published['races'] if r['date']==date}
     count, errors = 0, []
     with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
         for rid,values,meta,errs in pool.map(lambda cn:read_race(cn,date),jobs):
@@ -126,6 +158,7 @@ def main():
             errors += errs
             previous = old['odds'].get(rid,{})
             if values:
+                remember_pre_start(old,race_index.get(rid),rid,values,meta)
                 old['odds'][rid] = {**previous,**values}
                 prior_meta = old['meta'].get(rid,{})
                 meta['sources'] = {**prior_meta.get('sources',{}),**meta['sources']}
