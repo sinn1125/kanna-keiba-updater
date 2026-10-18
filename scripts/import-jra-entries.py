@@ -4,6 +4,7 @@ The official entry index supplies meeting links; no CNAME or meeting date is
 hard-coded. Horse identity is based on the official horse CNAME, not a draw.
 """
 import concurrent.futures
+import os
 import hashlib
 import importlib.util
 import json
@@ -117,7 +118,7 @@ def main():
         if len(all_races) != 1:
             raise ValueError(f"{label}: official full-entry link missing")
         jobs.append((label, all_races[0][1]))
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
         batches = list(pool.map(lambda pair: parse_meeting(*pair), jobs))
     fresh_races = [r for rs, _ in batches for r in rs]
     fresh_horses = [h for _, hs in batches for h in hs]

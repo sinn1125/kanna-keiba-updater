@@ -1,11 +1,18 @@
 name: Official racing data update
 on:
   schedule:
-    # Daily UTC 00:00–08:00 = JST 09:00–17:00. The official JRA
-    # date links decide whether a meeting exists, including weekday holidays.
+    # UTC 00:00–08:00 = JST 09:00–17:00, 49 reservation slots.
+    # Official JRA date links decide whether there is a meeting (incl. holidays).
     - cron: '*/10 0-7 * * *'
     - cron: '0 8 * * *'
   workflow_dispatch:
+    inputs:
+      component:
+        description: 'Run all updates or only one independent component'
+        required: true
+        default: all
+        type: choice
+        options: [all, entries, weights, histories, forecasts, results, odds]
   push:
     paths:
       - 'scripts/**'
@@ -18,11 +25,19 @@ concurrency:
   cancel-in-progress: false
 jobs:
   update:
-    # Public repositories have free hosted runner minutes. Keep recurring runs
-    # paused while private rather than consume the owner's paid allowance.
+    name: Update ${{ matrix.component }}
     if: github.event.repository.private == false || github.event_name != 'schedule'
     runs-on: ubuntu-latest
     timeout-minutes: 9
+    strategy:
+      fail-fast: false
+      max-parallel: 4
+      matrix:
+        component: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.component != 'all' && format('["{0}"]', inputs.component) || '["entries","weights","histories","forecasts","results","odds"]') }}
+    env:
+      # Four jobs with one HTTP worker each: do not multiply source connections.
+      JRA_FETCH_WORKERS: '1'
+      JRA_STAGE_TIMEOUT: '360'
     steps:
       - uses: actions/checkout@v4
         with:
@@ -32,40 +47,14 @@ jobs:
           python-version: '3.12'
       - name: Test central update protections
         run: python -m unittest discover -s tests
-      - name: Fetch and verify central racing data
-        id: fetch
-        continue-on-error: true
-        # The runner retries each failed stage, rolls it back, and continues
-        # independent stages within a 7 minute budget (9 minute job limit).
-        run: python scripts/update.py
-      - name: Keep update diagnostics
+      - name: Independently fetch, validate and save ${{ matrix.component }}
+        run: python scripts/update-component.py '${{ matrix.component }}' --publish
+      - name: Keep component diagnostics
         if: always()
         continue-on-error: true
         uses: actions/upload-artifact@v4
         with:
-          name: update-report-${{ github.run_id }}
-          path: update-report.json
+          name: update-${{ matrix.component }}-${{ github.run_id }}
+          path: update-report-${{ matrix.component }}.json
           if-no-files-found: ignore
           retention-days: 7
-      - name: Commit verified data
-        run: |
-          if [ ! -d dist ]; then exit 0; fi
-          python -c "import json; r=json.load(open('update-report.json')); assert r.get('status') == 'no-meeting' or any(x.get('success') for x in r.get('results',[])), 'No verified update to publish'"
-          git add dist/
-          if git diff --cached --quiet; then exit 0; fi
-          git config user.name 'kanna-keiba-updater[bot]'
-          git config user.email 'kanna-keiba-updater@users.noreply.github.com'
-          git commit -m 'Update verified official racing snapshots'
-          # Retry a transient transport error; never force or merge an older
-          # snapshot over a concurrent update. A conflict retries next run.
-          for attempt in 1 2 3; do
-            git push && exit 0
-            sleep 2
-          done
-          exit 1
-
-      - name: Report incomplete update
-        if: steps.fetch.outcome == 'failure'
-        run: |
-          echo 'One or more stages failed; validated snapshots were preserved. Retry on next scheduled run.'
-          exit 1

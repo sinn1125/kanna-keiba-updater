@@ -36,7 +36,7 @@ def atomic_write(path, content):
 def run(*args):
     remaining = DEADLINE - time.monotonic() if DEADLINE else 90
     if remaining < 5: raise TimeoutError('Update time budget exhausted; retry next scheduled run')
-    subprocess.run([sys.executable, *args], cwd=ROOT, check=True, timeout=min(90, remaining))
+    subprocess.run([sys.executable, *args], cwd=ROOT, check=True, timeout=min(max(1,min(360,int(os.environ.get("JRA_STAGE_TIMEOUT","90")))), remaining))
 
 def stage(name, args, validate):
     """Retry only this transaction; never keep its failed/invalid file writes."""

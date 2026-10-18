@@ -5,6 +5,7 @@ result or final odds from an unconfirmed entry or an earlier race.
 """
 import importlib.util
 import concurrent.futures
+import os
 import json
 import copy
 import re
@@ -137,7 +138,7 @@ def main():
             jobs += [(venue, cn) for cn in race_links if date.replace("-", "") in cn]
         if not jobs:
             raise ValueError("No official individual race links")
-        with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+        with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
             for batch in pool.map(lambda job: parse_day(p.request_jra("S", job[1]), date, job[0]), jobs):
                 updates += batch
     else:

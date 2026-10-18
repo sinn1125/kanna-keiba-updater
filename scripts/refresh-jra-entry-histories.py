@@ -4,6 +4,7 @@ Only official horse profile links already recorded by import-jra-entries are
 followed. Preserve notes and earlier enrichment while replacing stale starts.
 """
 import concurrent.futures
+import os
 import importlib.util
 import json
 import re
@@ -45,7 +46,7 @@ def main():
             raise ValueError("Duplicate official horse history")
         return h["id"], prior
 
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
         results = dict(pool.map(load, horses))
     for h in horses:
         old = {(x["date"], x["course"], x["name"]): x for x in h.get("history", [])}

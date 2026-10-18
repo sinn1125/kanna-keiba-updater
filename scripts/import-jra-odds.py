@@ -1,5 +1,6 @@
 """Read observed JRA odds links only. Missing markets keep their prior data."""
 import concurrent.futures
+import os
 import importlib.util
 import json
 import math
@@ -119,7 +120,7 @@ def main():
     target = ROOT/'dist/jra-odds.json'
     old = json.loads(target.read_text()) if target.exists() else {'odds':{},'meta':{}}
     count, errors = 0, []
-    with concurrent.futures.ThreadPoolExecutor(max_workers=4) as pool:
+    with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
         for rid,values,meta,errs in pool.map(lambda cn:read_race(cn,date),jobs):
             count += sum(len(v) for v in values.values())
             errors += errs
