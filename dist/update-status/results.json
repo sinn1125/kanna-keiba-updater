@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-18",
-  "checkedAt": "2026-10-18T11:35:36+09:00",
+  "checkedAt": "2026-10-18T12:04:30+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -13,13 +13,14 @@
     "jra-2026-10-18-kyoto-1",
     "jra-2026-10-18-kyoto-2",
     "jra-2026-10-18-kyoto-3",
+    "jra-2026-10-18-kyoto-4",
     "jra-2026-10-18-niigata-1",
     "jra-2026-10-18-niigata-2",
     "jra-2026-10-18-niigata-3",
     "jra-2026-10-18-niigata-4"
   ],
   "newlyConfirmedRaces": [
-    "jra-2026-10-18-tokyo-4"
+    "jra-2026-10-18-kyoto-4"
   ],
   "pendingRaces": [
     "jra-2026-10-18-tokyo-5",
@@ -30,7 +31,6 @@
     "jra-2026-10-18-tokyo-10",
     "jra-2026-10-18-tokyo-11",
     "jra-2026-10-18-tokyo-12",
-    "jra-2026-10-18-kyoto-4",
     "jra-2026-10-18-kyoto-5",
     "jra-2026-10-18-kyoto-6",
     "jra-2026-10-18-kyoto-7",
@@ -57,10 +57,11 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604070120261018%2F9A",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604070220261018%2F4F",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604070320261018%2F04",
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604070420261018%2FB9",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604020120261018%2F33",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604020220261018%2FE8",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604020320261018%2F9D",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604020420261018%2F52"
   ],
-  "completedAt": "2026-10-18T11:35:53+09:00"
+  "completedAt": "2026-10-18T12:04:42+09:00"
 }
