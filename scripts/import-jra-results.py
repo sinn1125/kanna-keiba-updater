@@ -29,7 +29,13 @@ def normalize(value):
     return re.sub(r"\s+", "", value or "")
 
 
-def parse_day(source, date, venue):
+def observed_cnames(source, prefix, date):
+    """Only follow CNAMEs actually present in an official JRA response."""
+    observed = re.findall(r"pw01s(?:de|rl|es)\d+/[A-F0-9]{2}", source)
+    return list(dict.fromkeys(c for c in observed if c.startswith(prefix) and date.replace("-", "") in c))
+
+
+def parse_day(source, date, venue, issues=None):
     root = p.tree(source)
     units = root.all("div", "race_result_unit")
     updates = []
@@ -55,7 +61,10 @@ def parse_day(source, date, venue):
             for pick, yen, rank in re.findall(r"(\d+(?:-\d+){0,2})\s+([\d,]+)円\s+(\d+)番人気", li.text()):
                 payout.append({"type": typ[0], "pick": pick, "amount": int(yen.replace(",", "")), "popularity": rank + "番人気"})
         if not payout or not any(x['type'] == '単勝' for x in payout):
-            raise ValueError(f"{rid}: result visible but official payouts incomplete")
+            if issues is None:
+                raise ValueError(f"{rid}: result visible but official payouts incomplete")
+            issues.append(f"{rid}: result visible but official payouts incomplete")
+            continue
         laps = []
         for row in unit.first("div", "result_time_data").all("tr"):
             cs = p.cells(row)
@@ -75,74 +84,91 @@ def parse_day(source, date, venue):
 def main():
     date = sys.argv[1] if len(sys.argv) > 1 else datetime.now(timezone(timedelta(hours=9))).date().isoformat()
     datetime.fromisoformat(date)
+    detail = ROOT / 'update-detail-results.json'
+    def record(**values):
+        detail.write_text(json.dumps({'date': date, **values}, ensure_ascii=False, indent=2) + '\n')
     ym = date[:7].replace("-", "")
     index = p.request_jra("S", "pw01skl00999999/B3")
     params = dict(re.findall(r'objParam\["(\d+)"\]="([A-F0-9]+)"', index))
     current_month = re.search(r'var yearMonth = "(\d{6})"', index)[1]
-    if ym[2:] not in params:
-        print("RESULTS UNPUBLISHED", date)
-        return
-    month_cname = ("pw01skl00" if ym >= current_month else "pw01skl10") + ym + "/" + params[ym[2:]]
-    month = p.tree(p.request_jra("S", month_cname))
-    meetings = [(label, cn) for label, cn in links(month, "pw01srl1") if date.replace("-", "") in cn]
+    meetings = []
+    if ym[2:] in params:
+        month_cname = ("pw01skl00" if ym >= current_month else "pw01skl10") + ym + "/" + params[ym[2:]]
+        month = p.tree(p.request_jra("S", month_cname))
+        meetings = [(label, cn) for label, cn in links(month, "pw01srl1") if date.replace("-", "") in cn]
+    # The monthly index often lags the live result pages. A missing month or
+    # day is not evidence that all individual races are unpublished.
     updates = []
+    issues = []
+    current_days = []
     if not meetings and '--seed' not in sys.argv:
-        # This is the current-results navigation link observed on JRA.
+        # This is JRA's current-results navigation page, not a fabricated
+        # checksum URL for a race that has not yet been published.
         current = p.request_jra('S', 'pw01sli00/AF')
-        observed = re.findall(r"pw01sde01\d+/[A-F0-9]{2}", current)
-        seed = next((cn for cn in observed if date.replace('-', '') in cn), None)
+        observed = observed_cnames(current, 'pw01sde', date)
+        current_days = observed_cnames(current, 'pw01srl', date)
+        seed = next(iter(observed), None)
         if seed:
             sys.argv.extend(['--seed', seed])
-    if meetings:
+    if meetings and not current_days and '--seed' not in sys.argv:
         for label, cname in meetings:
             day = p.tree(p.request_jra("S", cname))
             options = links(day, "pw01ses1")
             if len(options) != 1:
-                raise ValueError(f"Official result-page link missing for {label}")
+                issues.append(f"{label}: official aggregate result link pending")
+                continue
             venue = next((v for v in VENUES if v in label), None)
             if not venue:
                 raise ValueError(f"Unexpected official venue: {label}")
-            updates += parse_day(p.request_jra("S", options[0][1]), date, venue)
-    elif "--seed" in sys.argv:
+            updates += parse_day(p.request_jra("S", options[0][1]), date, venue, issues)
+    elif "--seed" in sys.argv or current_days:
         # The monthly index can lag behind results published during a meeting.
         # Start from an independently observed official individual result URL,
         # then follow the actual day and race links present in JRA navigation.
-        seed = sys.argv[sys.argv.index("--seed") + 1]
-        if not re.fullmatch(r"pw01sde0\d+/[A-F0-9]{2}", seed) or date.replace("-", "") not in seed:
+        seed = sys.argv[sys.argv.index("--seed") + 1] if "--seed" in sys.argv else None
+        if seed and (not re.fullmatch(r"pw01sde(?:01|10)\d+/[A-F0-9]{2}", seed) or date.replace("-", "") not in seed):
             raise ValueError("Seed is not an official result link for the target date")
-        seed_html = p.request_jra("S", seed)
-        seed_links = re.findall(r'href="/JRADB/accessS\.html\?CNAME=(pw01sde0[^"<>]+)"', seed_html)
+        seed_html = p.request_jra("S", seed) if seed else ''
+        seed_links = observed_cnames(seed_html, 'pw01sde', date)
         by_venue = {}
-        for cn in [seed] + seed_links:
-            match = re.match(r'pw01sde01(\d{2})', cn)
+        for cn in ([seed] if seed else []) + seed_links:
+            match = re.match(r'pw01sde(?:01|10)(\d{2})', cn)
             if match and date.replace("-", "") in cn:
                 by_venue.setdefault(match[1], cn)
-        days = []
+        days = list(current_days)
         for cn in by_venue.values():
-            page = p.tree(seed_html if cn == seed else p.request_jra("S", cn))
-            days += [day for _, day in links(page, "pw01srl0") if date.replace("-", "") in day]
+            page = seed_html if cn == seed else p.request_jra("S", cn)
+            days += observed_cnames(page, 'pw01srl', date)
         days = list(dict.fromkeys(days))
-        if not days:
-            raise ValueError("No official meeting links on the result page")
         jobs = []
         for day_cname in days:
-            day = p.tree(p.request_jra("S", day_cname))
+            day_html = p.request_jra("S", day_cname)
+            day = p.tree(day_html)
             heading = next((h.text() for h in day.all("h1") if "レース結果 レース選択" in h.text()), "")
             venue = next((v for v in VENUES if v in heading), None)
             if not venue or date.replace("-", "") not in day_cname:
                 raise ValueError("Official result meeting/date mismatch")
             # href CNAMEs are actual links on the official day page. Future
             # races may appear there but yield no confirmed result/payout.
-            page = p.request_jra("S", day_cname)
-            race_links = list(dict.fromkeys(re.findall(r'href="/JRADB/accessS\.html\?CNAME=(pw01sde0[^"<>]+)"', page)))
-            jobs += [(venue, cn) for cn in race_links if date.replace("-", "") in cn]
+            race_links = observed_cnames(day_html, 'pw01sde', date)
+            jobs += [(venue, cn) for cn in race_links]
+        if not jobs and seed:
+            # A single confirmed result can precede publication of its day
+            # selector. The seed itself is an observed official race link.
+            code = re.match(r'pw01sde(?:01|10)(\d{2})', seed)[1]
+            venue = next((v for v in VENUES if f'{p.VENUES.index(v)+1:02}' == code), None)
+            if venue:
+                jobs = [(venue, seed)]
+        jobs = list(dict.fromkeys(jobs))
         if not jobs:
             raise ValueError("No official individual race links")
+        print('OFFICIAL RACE LINKS', date, len(jobs), flush=True)
         with concurrent.futures.ThreadPoolExecutor(max_workers=max(1,min(4,int(os.environ.get("JRA_FETCH_WORKERS","4"))))) as pool:
-            for batch in pool.map(lambda job: parse_day(p.request_jra("S", job[1]), date, job[0]), jobs):
+            for batch in pool.map(lambda job: parse_day(p.request_jra("S", job[1]), date, job[0], issues), jobs):
                 updates += batch
     else:
-        print("RESULTS UNPUBLISHED", date)
+        print("RESULTS UNPUBLISHED: no official current or monthly race link", date)
+        record(status='no-official-result-links', confirmedRaces=[], failedRaces=[], officialUrls=[])
         return
     if len({rid for rid, _, _ in updates}) != len(updates):
         raise ValueError("Duplicate result race ID")
@@ -152,7 +178,10 @@ def main():
     races = {r["id"]: r for r in data["races"]}
     horses = {h["id"]: h for h in data["horses"]}
     count = 0
+    newly_confirmed = []
+    confirmed = []
     for rid, result, rows in updates:
+      try:
         if rid not in races:
             raise ValueError(f"Result has no registered race: {rid}")
         listed = [copy.deepcopy(h) for h in horses.values() if h['raceId'] == rid]
@@ -188,12 +217,27 @@ def main():
         old = races[rid]
         if all(old.get(k) == v for k, v in result.items() if k != 'fetchedAt'):
             result['fetchedAt'] = old.get('fetchedAt', result['fetchedAt'])
+        if old['status'] != 'results':
+            newly_confirmed.append(rid)
         races[rid].update(result)
+        confirmed.append(rid)
         count += 1
+      except Exception as error:
+        issues.append(f'{rid}: {error}')
+        print('FAILED RACE', rid, str(error), flush=True)
     after = "const RESULT_DATA=" + json.dumps(data, ensure_ascii=False, separators=(",", ":")) + ";\n"
     if '--dry-run' not in sys.argv and before != after:
         target.write_text(after)
-    print("RESULTS", date, count, "CHANGED", before != after, "DRY_RUN", '--dry-run' in sys.argv)
+    pending = [r['id'] for r in data['races'] if r['date'] == date and r['status'] == 'entries']
+    sources = [cn for _, cn in jobs] if 'jobs' in locals() else [cn for _, cn in meetings]
+    official_urls = ['https://www.jra.go.jp/JRADB/accessS.html?CNAME=' + cn.replace('/', '%2F')
+                     for cn in sources]
+    record(status='partial' if pending or issues else 'checked', confirmedRaces=confirmed,
+           newlyConfirmedRaces=newly_confirmed, pendingRaces=pending,
+           failedRaces=issues, officialUrls=official_urls)
+    print("RESULTS", date, count, "CHANGED", before != after, "DRY_RUN", '--dry-run' in sys.argv,
+          "NEW", json.dumps(newly_confirmed, ensure_ascii=False),
+          "ISSUES", json.dumps(issues, ensure_ascii=False), flush=True)
 
 
 if __name__ == "__main__":

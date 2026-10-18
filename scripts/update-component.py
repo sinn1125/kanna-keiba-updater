@@ -106,7 +106,8 @@ def compose(files, statuses):
     data=files['results-data.js'];odds=files['jra-odds.json'];forecasts=u.feed_forecasts(data,files['jra-forecasts.json'])
     stages=[statuses.get(c,{'stage':c,'success':False,'status':'not-yet-run'}) for c in COMPONENTS]
     today=[r for r in data['races'] if r['date']==u.DATE];ids={r['id'] for r in today}
-    result={'organization':'jra','success':True,'partial':any(not s.get('success') or s.get('date')!=u.DATE for s in stages),
+    result={'organization':'jra','success':True,'partial':any(not s.get('success') or s.get('date')!=u.DATE or
+             s.get('status') in ('partial','no-official-result-links') for s in stages),
             'stages':stages,'races':len(data['races']),'horses':len(data['horses']),
             'confirmedToday':sum(r['status']=='results' for r in today),'forecasts':sum(r in forecasts for r in ids),
             'forecastPredicted':sum(forecasts[r].get('status')=='predicted' for r in ids if r in forecasts),
@@ -182,7 +183,11 @@ def main():
             validator=u.verify_forecasts if component=='forecasts' else u.verify_odds if component=='odds' else lambda:u.verify_data(before['results-data.js'])
             if component in ('forecasts','histories') and not any(r['date']==u.DATE for r in before['results-data.js']['races']):
                 raise ValueError('No official entries yet; this component will retry independently next run')
+            if component=='results':(ROOT/'update-detail-results.json').unlink(missing_ok=True)
             status=u.stage(component,command,validator);report.update(status)
+            if component=='results' and status.get('success'):
+                details=ROOT/'update-detail-results.json'
+                if details.exists():report.update(json.loads(details.read_text()))
             after={n:decode(n,(u.DIST/n).read_bytes() if (u.DIST/n).exists() else None) for n in FILES}
             after['results-data.js']=restrict(component,before['results-data.js'],after['results-data.js'])
             if component=='odds':sync_single_odds(after['results-data.js'],after['jra-odds.json'])
