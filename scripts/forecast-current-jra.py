@@ -17,6 +17,10 @@ import sys
 import unicodedata
 
 ROOT = Path(__file__).resolve().parents[1]
+import importlib.util
+_spec = importlib.util.spec_from_file_location('track_condition', ROOT/'scripts/track-condition.py')
+track_condition = importlib.util.module_from_spec(_spec)
+_spec.loader.exec_module(track_condition)
 source = json.loads((ROOT/'dist/results-data.js').read_text().split('=',1)[1].rstrip(';\n'))
 current = json.loads((ROOT/'dist/ai-model-base.json').read_text())
 forecast_path = ROOT/'dist/jra-forecasts.json'
@@ -40,11 +44,13 @@ for file in sorted((ROOT/'dist/model-context').glob('20??.json.gz'))+[None]:
     for item in data['races']:
         if item['status']!='results':continue
         key=f"{item['date']}|{item['course']}|{item['number']}"
-        if key in RACES:continue
+        if key in RACES:
+            if item.get('weather'):RACES[key]['weather']=item['weather']
+            continue
         route=item.get('track','')
         surface='障害' if '障害' in item.get('surface','') or '障害' in route else 'ダート' if 'ダート' in item.get('surface','') or 'ダート' in route else '芝'
         r={'id':key,'date':item['date'],'course':item['course'],'number':item['number'],'name':item['name'],
-           'distance':int(item['distance']),'surface':surface,'route':route,'grade':grade(str(item.get('grade',''))+' '+item.get('className','')),'runners':[]}
+           'weather':item.get('weather',''),'going':item.get('going'),'distance':int(item['distance']),'surface':surface,'route':route,'grade':grade(str(item.get('grade',''))+' '+item.get('className','')),'runners':[]}
         for h in horses[item['id']]:
             if h.get('entryState')=='not_listed':continue
             identity=h['id'].split('-horse-')[-1][-10:]
@@ -76,7 +82,7 @@ def predict(info, target, hs):
     rid=f"{info['date']}|{info['course']}|{info['number']}"
     surface='障害' if '障害' in info.get('surface','') else 'ダート' if 'ダート' in info.get('surface','') else '芝'
     r={'id':rid,'date':info['date'],'course':info['course'],'number':info['number'],'name':info['name'],
-       'distance':int(info['distance']),'surface':surface,'route':info.get('track',''),
+       'weather':info.get('weather',''),'going':info.get('going'),'distance':int(info['distance']),'surface':surface,'route':info.get('track',''),
        'grade':grade(str(info.get('grade',''))+' '+info.get('className','')),'field':len(hs),'runners':[]}
     for h in hs:
         m=re.search(r'pw01dud(\d{11,13})/',h.get('horseCname',''))
@@ -100,6 +106,10 @@ def predict(info, target, hs):
               'placeScore':probability(x,'place') if eligible else None,
               'podiumScore':probability(x,'podium') if eligible else None,
               'evidence':ev,'features':x,'number':int(h['number']) if str(h.get('number','')).isdigit() else None}
+        condition = track_condition.adjustment(g, hid, r)
+        item['evidence']['trackCondition'] = condition
+        for score in ('winScore','placeScore','podiumScore'):
+            item[score] = track_condition.apply_probability(item[score], condition)
         items[h['id']]=item
         if eligible:available.append((h['id'],item))
         else:withheld.append(h['name'])
@@ -120,7 +130,9 @@ if current['models']['平地'].get('featureVersion')=='enhanced-v1':
     extra.install(g)
 
 dates=set(sys.argv[1:] or ['2026-10-10','2026-10-11'])
-targets=[r for r in source['races'] if r['date'] in dates and r['id'] not in current['races']]
+now = datetime.now(timezone(timedelta(hours=9)))
+targets=[r for r in source['races'] if r['date'] in dates and
+         (r['id'] not in current['races'] or track_condition.before_start(r, now))]
 if not targets:
     print('FORECAST 0 missing races')
     sys.exit(0)
@@ -141,3 +153,4 @@ for r in targets:
 current['fetchedAt']=datetime.now(timezone(timedelta(hours=9))).isoformat(timespec='seconds')
 forecast_path.write_text(json.dumps(current['races'],ensure_ascii=False,separators=(',',':'))+'\n')
 print('FORECAST',len(targets),'races',sum(x['status']=='predicted' for x in (current['races'][r['id']] for r in targets)),'predicted',len(RACES),'official result races')
+
