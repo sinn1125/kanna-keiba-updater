@@ -140,6 +140,9 @@ def publish(component, before, after, report):
         if report.get('status')!='no-meeting':
             feed=compose(files,statuses)
             changes['dist/feed.json']=(json.dumps(feed,ensure_ascii=False,separators=(',',':'))+'\n').encode()
+            # Tiny change indicator lets clients avoid repeatedly fetching the full feed.
+            metadata={'version':1,'checkedAt':feed['checkedAt'],'date':feed['date']}
+            changes['dist/update-status/latest.json']=(json.dumps(metadata,separators=(',',':'))+'\n').encode()
             spec=importlib.util.spec_from_file_location('public',ROOT/'scripts/public-racecards.py')
             public=importlib.util.module_from_spec(spec);spec.loader.exec_module(public)
             changes['dist/public-racecards.json']=(json.dumps(public.racecards(feed),ensure_ascii=False,separators=(',',':'))+'\n').encode()
@@ -209,3 +212,4 @@ def main():
     return 0 if report['success'] else 1
 
 if __name__=='__main__':raise SystemExit(main())
+

@@ -76,7 +76,12 @@ class IndependentUpdates(unittest.TestCase):
             self.assertEqual(result['jra']['horses'][0]['winOdds'],2.5)
             self.assertEqual(result['jra']['horses'][0]['note'],'saved')
             self.assertEqual(result['jraOdds']['jra-r']['単勝']['1'],[2.5])
+            metadata=json.loads(git('show',head+':dist/update-status/latest.json'))
+            self.assertEqual(metadata['checkedAt'],result['checkedAt'])
+            self.assertEqual(metadata['version'],1)
+            self.assertLess(len(json.dumps(metadata)),300)
             self.assertTrue(result['results'][0]['partial']) # Other jobs haven't run.
             self.assertEqual(git('diff','--name-only'),'') # Never resets/stashes a working checkout.
 
 if __name__=='__main__':unittest.main()
+
