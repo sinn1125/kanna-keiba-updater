@@ -1,10 +1,11 @@
 name: Official racing data update
 on:
   schedule:
-    # UTC 00:00–08:00 = JST 09:00–17:00, 49 reservation slots.
-    # Official JRA date links decide whether there is a meeting (incl. holidays).
-    - cron: '*/10 0-7 * * *'
-    - cron: '0 8 * * *'
+    # Keep live runners warm between reservations; avoid the busy hour boundary.
+    # 09:07–16:37 JST, plus a 09:00 start and 17:07 final-result catch-up.
+    - cron: '7,37 0-7 * * *'
+    - cron: '0 0 * * *'
+    - cron: '7 8 * * *'
   workflow_dispatch:
     inputs:
       component:
@@ -20,20 +21,20 @@ on:
       - '.github/workflows/update.yml'
 permissions:
   contents: write
-concurrency:
-  group: official-racing-update
-  cancel-in-progress: false
 jobs:
   update:
     name: Update ${{ matrix.component }}
-    if: github.event.repository.private == false || github.event_name != 'schedule'
+    if: github.ref == 'refs/heads/main' && (github.event.repository.private == false || github.event_name != 'schedule')
+    concurrency:
+      group: official-racing-${{ matrix.component }}
+      cancel-in-progress: false
     runs-on: ubuntu-latest
-    timeout-minutes: 9
+    timeout-minutes: 40
     strategy:
       fail-fast: false
       max-parallel: 4
       matrix:
-        component: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.component != 'all' && format('["{0}"]', inputs.component) || '["entries","weights","histories","forecasts","results","odds"]') }}
+        component: ${{ fromJSON(github.event_name == 'workflow_dispatch' && inputs.component != 'all' && format('["{0}"]', inputs.component) || '["results","odds","entries","weights","forecasts","histories"]') }}
     env:
       # Four jobs with one HTTP worker each: do not multiply source connections.
       JRA_FETCH_WORKERS: '1'
@@ -47,7 +48,11 @@ jobs:
           python-version: '3.12'
       - name: Test central update protections
         run: python -m unittest discover -s tests
+      - name: Keep results and odds updating on the same runner
+        if: github.event_name == 'schedule' && (matrix.component == 'results' || matrix.component == 'odds')
+        run: python scripts/live-session.py '${{ matrix.component }}' --minutes 30
       - name: Independently fetch, validate and save ${{ matrix.component }}
+        if: github.event_name != 'schedule' || (matrix.component != 'results' && matrix.component != 'odds')
         run: python scripts/update-component.py '${{ matrix.component }}' --publish
       - name: Keep component diagnostics
         if: always()
@@ -58,3 +63,4 @@ jobs:
           path: update-report-${{ matrix.component }}.json
           if-no-files-found: ignore
           retention-days: 7
+

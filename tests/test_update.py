@@ -30,13 +30,12 @@ class Protections(unittest.TestCase):
         self.assertEqual(odds.parse_market(html,'wide'),{'1-2':[21.1,22.5]})
         html='<table class="tan3 pop"><tbody><tr><td class="num">9-1-18</td><td class="odds">112.3</td></tr></tbody></table>'
         self.assertEqual(odds.parse_market(html,'tan3'),{'9-1-18':[112.3]})
-    def test_49_scheduled_slots_on_any_official_meeting_day(self):
+    def test_live_session_reservations_cover_meeting_days(self):
         text=(ROOT/'.github/workflows/update.yml').read_text()
-        self.assertIn("'*/10 0-7 * * *'",text)
-        self.assertIn("'0 8 * * *'",text)
-        slots=[(h+9,m) for h in range(8) for m in range(0,60,10)]+[(17,0)]
-        self.assertEqual(len(slots),49)
-        self.assertEqual(slots[0],(9,0));self.assertEqual(slots[-1],(17,0))
+        for cron in ("'7,37 0-7 * * *'", "'0 0 * * *'", "'7 8 * * *'"):
+            self.assertIn(cron,text)
+        self.assertIn('--minutes 30',text)
+        self.assertIn('cancel-in-progress: false',text)
     def test_public_racecards_exclude_private_and_prediction_fields(self):
         feed={'version':1,'checkedAt':'2026-10-13T12:00:00+09:00','jra':{
             'races':[{'id':'jra-test','date':'2026-10-13','course':'東京','number':1,'name':'競走','field':1,'status':'entries','payouts':[999], 'secret':'hidden'}],
@@ -49,3 +48,4 @@ class Protections(unittest.TestCase):
             self.assertNotIn(word,str(result))
 
 if __name__=='__main__':unittest.main()
+
