@@ -63,6 +63,7 @@ def parse_meeting(label, cname):
                 "startTime": f"{int(start[1]):02}:{int(start[2]):02}" if start else "",
                 "category": caption.first("div", "category").text(), "className": caption.first("div", "class").text(),
                 "rule": caption.first("div", "rule").text(), "grade": "", "field": len(entry_rows),
+                "weather": caption.first("div", "baba").text(),
                 "registeredField": len(entry_rows), "status": "entries", "source": "JRA公式出馬表", "fetchedAt": fetched}
         if not name or not entry_rows:
             raise ValueError(f"{rid}: missing race name or entries")
@@ -180,3 +181,4 @@ def main():
 
 if __name__ == "__main__":
     main()
+
