@@ -1,8 +1,9 @@
 {
   "stage": "histories",
-  "date": "2026-10-24",
-  "checkedAt": "2026-10-24T19:41:35+09:00",
-  "success": true,
-  "attempts": 1,
-  "completedAt": "2026-10-24T19:41:38+09:00"
+  "date": "2026-10-25",
+  "checkedAt": "2026-10-25T09:20:30+09:00",
+  "success": false,
+  "attempts": 2,
+  "error": "TimeoutExpired: Command '['/opt/hostedtoolcache/Python/3.12.15/x64/bin/python', 'scripts/refresh-jra-entry-histories.py', '2026-10-25']' timed out after 55.84021979699992 seconds",
+  "completedAt": "2026-10-25T09:27:32+09:00"
 }
