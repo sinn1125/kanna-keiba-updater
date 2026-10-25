@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-25",
-  "checkedAt": "2026-10-25T16:57:04+09:00",
+  "checkedAt": "2026-10-25T16:59:04+09:00",
   "success": true,
   "attempts": 1,
   "status": "checked",
@@ -9,6 +9,7 @@
     "jra-2026-10-25-tokyo-1",
     "jra-2026-10-25-tokyo-2",
     "jra-2026-10-25-tokyo-3",
+    "jra-2026-10-25-tokyo-4",
     "jra-2026-10-25-tokyo-5",
     "jra-2026-10-25-tokyo-6",
     "jra-2026-10-25-tokyo-7",
@@ -22,6 +23,7 @@
     "jra-2026-10-25-kyoto-3",
     "jra-2026-10-25-kyoto-4",
     "jra-2026-10-25-kyoto-5",
+    "jra-2026-10-25-kyoto-6",
     "jra-2026-10-25-kyoto-7",
     "jra-2026-10-25-kyoto-8",
     "jra-2026-10-25-kyoto-9",
@@ -82,5 +84,5 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604041120261025%2F8E",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604041220261025%2F43"
   ],
-  "completedAt": "2026-10-25T16:57:40+09:00"
+  "completedAt": "2026-10-25T16:59:45+09:00"
 }
