@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-25",
-  "checkedAt": "2026-10-25T10:38:09+09:00",
+  "checkedAt": "2026-10-25T10:40:10+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -46,9 +46,7 @@
     "jra-2026-10-25-niigata-11",
     "jra-2026-10-25-niigata-12"
   ],
-  "failedRaces": [
-    "jra-2026-10-25-kyoto-2: result visible but official payouts incomplete"
-  ],
+  "failedRaces": [],
   "officialUrls": [
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604090120261025%2FC5",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604090220261025%2F7A",
@@ -57,5 +55,5 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604040120261025%2F3C",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0104202604040220261025%2FF1"
   ],
-  "completedAt": "2026-10-25T10:38:22+09:00"
+  "completedAt": "2026-10-25T10:40:21+09:00"
 }
