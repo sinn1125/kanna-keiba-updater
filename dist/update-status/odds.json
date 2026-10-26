@@ -1,8 +1,8 @@
 {
   "stage": "odds",
-  "date": "2026-10-25",
-  "checkedAt": "2026-10-25T17:13:39+09:00",
+  "date": "2026-10-26",
+  "checkedAt": "2026-10-26T09:27:55+09:00",
   "success": true,
-  "attempts": 1,
-  "completedAt": "2026-10-25T17:18:17+09:00"
+  "status": "no-meeting",
+  "completedAt": "2026-10-26T09:27:57+09:00"
 }
