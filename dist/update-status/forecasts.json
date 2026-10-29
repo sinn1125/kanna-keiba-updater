@@ -1,8 +1,8 @@
 {
   "stage": "forecasts",
-  "date": "2026-10-28",
-  "checkedAt": "2026-10-28T17:49:41+09:00",
-  "success": true,
-  "status": "no-meeting",
-  "completedAt": "2026-10-28T17:49:44+09:00"
+  "date": "2026-10-29",
+  "checkedAt": "2026-10-29T09:34:17+09:00",
+  "success": false,
+  "error": "ValueError: Official meeting index has no readable meeting links",
+  "completedAt": "2026-10-29T09:34:22+09:00"
 }
