@@ -1,8 +1,8 @@
 {
   "stage": "odds",
   "date": "2026-10-29",
-  "checkedAt": "2026-10-29T11:23:16+09:00",
+  "checkedAt": "2026-10-29T11:47:11+09:00",
   "success": false,
   "error": "ValueError: Official meeting index has no readable meeting links",
-  "completedAt": "2026-10-29T11:23:21+09:00"
+  "completedAt": "2026-10-29T11:47:15+09:00"
 }
