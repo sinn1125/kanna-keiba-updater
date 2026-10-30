@@ -31,8 +31,7 @@ def blind_evaluate(races, predictor=None):
             if timestamp(race["forecast_created_at"]) >= timestamp(race["start_at"]):
                 raise ValueError("forecast was not saved before start")
             # Never pass the result, finish, payouts, or post-start odds to the predictor.
-            inputs = {k: v for k, v in race.items() if k not in
-                      ("result", "finish", "payouts", "post_start_odds", "prediction")}
+            inputs = {k: race[k] for k in ("race_id", "start_at", "entrants", "pre_race_features", "workout_data") if k in race}
             prediction = predictor(inputs) if predictor else race["prediction"]
             winner = race["result"]["winner_id"]
             if winner not in prediction:
