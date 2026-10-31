@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-31",
-  "checkedAt": "2026-10-31T13:04:53+09:00",
+  "checkedAt": "2026-10-31T13:06:52+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -49,5 +49,5 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100520261031%2FE2",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100620261031%2F97"
   ],
-  "completedAt": "2026-10-31T13:05:12+09:00"
+  "completedAt": "2026-10-31T13:07:11+09:00"
 }
