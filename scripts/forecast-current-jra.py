@@ -21,6 +21,12 @@ import importlib.util
 _spec = importlib.util.spec_from_file_location('track_condition', ROOT/'scripts/track-condition.py')
 track_condition = importlib.util.module_from_spec(_spec)
 _spec.loader.exec_module(track_condition)
+_coverage_spec = importlib.util.spec_from_file_location('workout_coverage', ROOT/'scripts/workout-coverage.py')
+workout_coverage = importlib.util.module_from_spec(_coverage_spec)
+_coverage_spec.loader.exec_module(workout_coverage)
+# Optional manually entered, provenance-bearing workout records; no source means unknown.
+workout_path = ROOT/'dist/workout-records.json'
+workout_records = json.loads(workout_path.read_text()) if workout_path.exists() else {}
 source = json.loads((ROOT/'dist/results-data.js').read_text().split('=',1)[1].rstrip(';\n'))
 current = json.loads((ROOT/'dist/ai-model-base.json').read_text())
 forecast_path = ROOT/'dist/jra-forecasts.json'
@@ -119,8 +125,19 @@ def predict(info, target, hs):
         first=max(available,key=lambda z:(z[1]['winScore'],-(z[1]['number'] or 999)));first[1]['mark']='◎';ranked=[first[0]]
         rest=sorted((z for z in available if z[0]!=first[0]),key=lambda z:(-z[1]['placeScore'],z[1]['number'] or 999))
         for (hid,x),mark in zip(rest[:4],('○','▲','△','△')):x['mark']=mark;ranked.append(hid)
+    # Missing historical evidence does not imply a bad horse or a bad workout.
+    # Untrained priors remain visible as provisional context, never as a validated ◎.
+    active_ids = [h['id'] for h in hs if h.get('entryState') not in ('cancelled', 'not_listed')]
+    items, fallback = workout_coverage.fallback_scores(items, active_ids)
+    race_workouts = workout_records.get(info['id'], {}) if isinstance(workout_records, dict) else {}
+    if not isinstance(race_workouts, dict):
+        race_workouts = {}
+    coverage = workout_coverage.workout_status(active_ids, race_workouts)
     return {'asOf':info['date'],'group':group,'status':'predicted' if ranked else 'insufficient',
-            'unknownHorses':len(withheld),'items':items,'ranked':ranked},withheld
+            'unknownHorses':len(withheld),'items':items,'ranked':ranked,
+            'dataQuality':{'historyFallback':fallback,'workout':coverage,
+                           'fallbackIsValidatedModel':False,
+                           'betRecommendationEligible':fallback['mode']=='original' and coverage['coverage']!='unknown'}},withheld
 
 # Load the exact extra equations used by an adopted challenger.
 if current['models']['平地'].get('featureVersion')=='enhanced-v1':
