@@ -1,12 +1,41 @@
 {
   "stage": "results",
   "date": "2026-10-31",
-  "checkedAt": "2026-10-31T10:00:42+09:00",
+  "checkedAt": "2026-10-31T10:02:42+09:00",
   "success": true,
   "attempts": 1,
-  "status": "no-official-result-links",
+  "status": "partial",
   "confirmedRaces": [],
+  "newlyConfirmedRaces": [],
+  "pendingRaces": [
+    "jra-2026-10-31-tokyo-1",
+    "jra-2026-10-31-tokyo-2",
+    "jra-2026-10-31-tokyo-3",
+    "jra-2026-10-31-tokyo-4",
+    "jra-2026-10-31-tokyo-5",
+    "jra-2026-10-31-tokyo-6",
+    "jra-2026-10-31-tokyo-7",
+    "jra-2026-10-31-tokyo-8",
+    "jra-2026-10-31-tokyo-9",
+    "jra-2026-10-31-tokyo-10",
+    "jra-2026-10-31-tokyo-11",
+    "jra-2026-10-31-tokyo-12",
+    "jra-2026-10-31-kyoto-1",
+    "jra-2026-10-31-kyoto-2",
+    "jra-2026-10-31-kyoto-3",
+    "jra-2026-10-31-kyoto-4",
+    "jra-2026-10-31-kyoto-5",
+    "jra-2026-10-31-kyoto-6",
+    "jra-2026-10-31-kyoto-7",
+    "jra-2026-10-31-kyoto-8",
+    "jra-2026-10-31-kyoto-9",
+    "jra-2026-10-31-kyoto-10",
+    "jra-2026-10-31-kyoto-11",
+    "jra-2026-10-31-kyoto-12"
+  ],
   "failedRaces": [],
-  "officialUrls": [],
-  "completedAt": "2026-10-31T10:00:48+09:00"
+  "officialUrls": [
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604100120261031%2F30"
+  ],
+  "completedAt": "2026-10-31T10:02:50+09:00"
 }
