@@ -1,8 +1,8 @@
 {
   "stage": "histories",
-  "date": "2026-10-30",
-  "checkedAt": "2026-10-30T17:51:38+09:00",
+  "date": "2026-10-31",
+  "checkedAt": "2026-10-31T09:41:25+09:00",
   "success": true,
-  "status": "no-meeting",
-  "completedAt": "2026-10-30T17:51:41+09:00"
+  "attempts": 1,
+  "completedAt": "2026-10-31T09:45:38+09:00"
 }
