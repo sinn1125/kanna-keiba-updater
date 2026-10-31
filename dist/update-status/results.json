@@ -1,8 +1,12 @@
 {
   "stage": "results",
-  "date": "2026-10-30",
-  "checkedAt": "2026-10-30T17:13:08+09:00",
+  "date": "2026-10-31",
+  "checkedAt": "2026-10-31T09:40:41+09:00",
   "success": true,
-  "status": "no-meeting",
-  "completedAt": "2026-10-30T17:13:10+09:00"
+  "attempts": 1,
+  "status": "no-official-result-links",
+  "confirmedRaces": [],
+  "failedRaces": [],
+  "officialUrls": [],
+  "completedAt": "2026-10-31T09:40:47+09:00"
 }
