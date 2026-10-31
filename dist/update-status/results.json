@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-10-31",
-  "checkedAt": "2026-10-31T14:10:49+09:00",
+  "checkedAt": "2026-10-31T14:38:53+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -14,21 +14,24 @@
     "jra-2026-10-31-tokyo-6",
     "jra-2026-10-31-tokyo-7",
     "jra-2026-10-31-tokyo-8",
+    "jra-2026-10-31-tokyo-9",
     "jra-2026-10-31-kyoto-1",
     "jra-2026-10-31-kyoto-2",
     "jra-2026-10-31-kyoto-3",
     "jra-2026-10-31-kyoto-4",
     "jra-2026-10-31-kyoto-5",
     "jra-2026-10-31-kyoto-6",
-    "jra-2026-10-31-kyoto-7"
+    "jra-2026-10-31-kyoto-7",
+    "jra-2026-10-31-kyoto-8"
   ],
-  "newlyConfirmedRaces": [],
-  "pendingRaces": [
+  "newlyConfirmedRaces": [
     "jra-2026-10-31-tokyo-9",
+    "jra-2026-10-31-kyoto-8"
+  ],
+  "pendingRaces": [
     "jra-2026-10-31-tokyo-10",
     "jra-2026-10-31-tokyo-11",
     "jra-2026-10-31-tokyo-12",
-    "jra-2026-10-31-kyoto-8",
     "jra-2026-10-31-kyoto-9",
     "jra-2026-10-31-kyoto-10",
     "jra-2026-10-31-kyoto-11",
@@ -44,13 +47,15 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604100620261031%2FB9",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604100720261031%2F6E",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604100820261031%2F23",
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604100920261031%2FD8",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100120261031%2F0E",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100220261031%2FC3",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100320261031%2F78",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100420261031%2F2D",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100520261031%2FE2",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100620261031%2F97",
-    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100720261031%2F4C"
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100720261031%2F4C",
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604100820261031%2F01"
   ],
-  "completedAt": "2026-10-31T14:11:06+09:00"
+  "completedAt": "2026-10-31T14:39:14+09:00"
 }
