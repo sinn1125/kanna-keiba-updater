@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-11-01",
-  "checkedAt": "2026-11-01T11:07:17+09:00",
+  "checkedAt": "2026-11-01T11:09:17+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -34,13 +34,16 @@
     "jra-2026-11-01-kyoto-11",
     "jra-2026-11-01-kyoto-12"
   ],
-  "failedRaces": [],
+  "failedRaces": [
+    "jra-2026-11-01-tokyo-3: result visible but official payouts incomplete"
+  ],
   "officialUrls": [
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604110120261101%2F10",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604110220261101%2FC5",
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202604110320261101%2F7A",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604110120261101%2FEE",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604110220261101%2FA3",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0108202604110320261101%2F58"
   ],
-  "completedAt": "2026-11-01T11:07:31+09:00"
+  "completedAt": "2026-11-01T11:09:35+09:00"
 }
