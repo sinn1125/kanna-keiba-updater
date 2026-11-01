@@ -1,8 +1,9 @@
 {
   "stage": "odds",
-  "date": "2026-10-31",
-  "checkedAt": "2026-10-31T17:12:51+09:00",
-  "success": true,
-  "attempts": 1,
-  "completedAt": "2026-10-31T17:15:34+09:00"
+  "date": "2026-11-01",
+  "checkedAt": "2026-11-01T09:39:23+09:00",
+  "success": false,
+  "attempts": 2,
+  "error": "AssertionError: Unknown odds race",
+  "completedAt": "2026-11-01T09:44:22+09:00"
 }
