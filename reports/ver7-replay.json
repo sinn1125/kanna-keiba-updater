@@ -1,0 +1,2601 @@
+{
+  "version": "v7-strategy-candidate-1",
+  "classification": "saved-input-replay-only; Ver.7 itself was not saved before these races",
+  "fixedRule": "100 yen per unique ticket; not a purchase record",
+  "eligibleSavedInputs": 101,
+  "excluded": {
+    "発走前予想なし": 15
+  },
+  "baseline": {
+    "topTrials": 83,
+    "topWins": 21,
+    "topPodiums": 51
+  },
+  "candidate": {
+    "proposed": 0,
+    "skip": 101,
+    "settledRaces": 0,
+    "cost": 0,
+    "returned": 0,
+    "roi": null,
+    "profit": null,
+    "averagePoints": null,
+    "torigamiRate": null,
+    "maxDrawdown": null
+  },
+  "strategyCounts": {
+    "1": 0,
+    "2": 0,
+    "3": 0,
+    "4": 0,
+    "5": 0,
+    "6": 0,
+    "7": 0,
+    "8": 0,
+    "9": 0,
+    "10": 0,
+    "11": 0,
+    "12": 0,
+    "13": 0,
+    "14": 0,
+    "15": 0,
+    "16": 0,
+    "17": 0,
+    "18": 0,
+    "19": 0,
+    "20": 0,
+    "21": 0,
+    "22": 0,
+    "23": 0,
+    "24": 0,
+    "25": 0,
+    "26": 0,
+    "27": 0,
+    "28": 0,
+    "29": 0,
+    "30": 101
+  },
+  "rows": [
+    {
+      "id": "jra-2026-10-18-kyoto-12",
+      "date": "2026-10-18",
+      "forecastAt": "2026-10-18T09:24:21+09:00",
+      "decisionAt": "2026-10-18T07:24:26.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-18-kyoto-12-horse-002022106639",
+        "finish": "6"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-3",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T01:57:16.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-3-horse-002024101733",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-4",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T02:24:52.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-5",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:00:10.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-6",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:30:10.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-7",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:05:12.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-7-horse-002022104570",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-8",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:35:53.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-8-horse-002023106964",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-9",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T05:07:50.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-9-horse-002022102153",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-10",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T05:37:44.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-10-horse-002023105748",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-11",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T06:42:50.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-11-horse-002024106677",
+        "finish": "10"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-tokyo-12",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T16:24:25+09:00",
+      "decisionAt": "2026-10-24T07:25:55.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-tokyo-12-horse-002023104545",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-4",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T01:58:29.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-4-horse-002021102973",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-5",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:01:16.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-6",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:31:25.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-6-horse-002023105648",
+        "finish": "9"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-7",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:06:22.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-7-horse-002023100912",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-8",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:37:22.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-8-horse-002023107071",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-9",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T05:09:03.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-9-horse-002024100937",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-10",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T05:38:55.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-10-horse-002022106470",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-11",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T06:07:46.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-11-horse-002022101193",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-kyoto-12",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T15:57:03+09:00",
+      "decisionAt": "2026-10-24T06:59:53.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-kyoto-12-horse-002023110084",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-4",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T01:59:35.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-4-horse-002023106949",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-5",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:02:55.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-6",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:32:36.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-6-horse-002023105839",
+        "finish": "6"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-7",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T03:32:42.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-7-horse-002022106645",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-8",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:07:37.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-8-horse-002023106573",
+        "finish": "10"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-9",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T04:38:49.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-9-horse-002023102427",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-10",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T05:10:25.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-10-horse-002023103013",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-11",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T10:56:32+09:00",
+      "decisionAt": "2026-10-24T06:08:56.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-11-horse-002022103207",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-24-niigata-12",
+      "date": "2026-10-24",
+      "forecastAt": "2026-10-24T15:57:03+09:00",
+      "decisionAt": "2026-10-24T07:00:59.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-24-niigata-12-horse-002023104047",
+        "finish": "10"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-4",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T11:04:11+09:00",
+      "decisionAt": "2026-10-25T02:16:12.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-4-horse-002021101779",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-5",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:05:54+09:00",
+      "decisionAt": "2026-10-25T03:06:35.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-6",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:34:59+09:00",
+      "decisionAt": "2026-10-25T03:38:03.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-7",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:09:47.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-7-horse-002023102592",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-8",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:37:14.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-8-horse-002023107138",
+        "finish": "14"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-9",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T14:06:25+09:00",
+      "decisionAt": "2026-10-25T05:06:42.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-9-horse-002021101305",
+        "finish": "8"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-10",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T14:34:51+09:00",
+      "decisionAt": "2026-10-25T05:43:23.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-10-horse-002022104818",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-11",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:04:25+09:00",
+      "decisionAt": "2026-10-25T06:18:02.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-11-horse-002022100905",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-tokyo-12",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:38:43+09:00",
+      "decisionAt": "2026-10-25T07:08:55.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-tokyo-12-horse-002023101117",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-4",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T11:04:11+09:00",
+      "decisionAt": "2026-10-25T02:26:15.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-5",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:05:54+09:00",
+      "decisionAt": "2026-10-25T03:19:45.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-6",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:34:59+09:00",
+      "decisionAt": "2026-10-25T03:47:13.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-6-horse-002022110125",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-7",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:19:04.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-7-horse-002023109106",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-8",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:41:57.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-8-horse-002023105415",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-9",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T14:06:25+09:00",
+      "decisionAt": "2026-10-25T05:24:26.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-9-horse-002024105037",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-10",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T14:34:51+09:00",
+      "decisionAt": "2026-10-25T05:59:17.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-10-horse-002022103267",
+        "finish": "9"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-11",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:38:43+09:00",
+      "decisionAt": "2026-10-25T06:39:49.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-11-horse-002023107089",
+        "finish": "14"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-kyoto-12",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:38:43+09:00",
+      "decisionAt": "2026-10-25T07:17:14.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-kyoto-12-horse-002023104876",
+        "finish": "11"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-4",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T11:04:11+09:00",
+      "decisionAt": "2026-10-25T02:06:44.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-4-horse-002023107095",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-5",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T11:33:57+09:00",
+      "decisionAt": "2026-10-25T02:57:49.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-6",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:05:54+09:00",
+      "decisionAt": "2026-10-25T03:28:34.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-6-horse-002023102167",
+        "finish": "9"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-7",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T12:34:59+09:00",
+      "decisionAt": "2026-10-25T03:56:30.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-7-horse-002022103705",
+        "finish": "9"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-8",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:28:07.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-8-horse-002021103504",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-9",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T13:09:47+09:00",
+      "decisionAt": "2026-10-25T04:43:12.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-9-horse-002022105534",
+        "finish": "6"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-10",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T14:34:51+09:00",
+      "decisionAt": "2026-10-25T05:34:51.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-10-horse-002022105421",
+        "finish": "8"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-11",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:04:25+09:00",
+      "decisionAt": "2026-10-25T06:08:05.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-11-horse-002021100157",
+        "finish": "8"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-25-niigata-12",
+      "date": "2026-10-25",
+      "forecastAt": "2026-10-25T15:38:43+09:00",
+      "decisionAt": "2026-10-25T07:00:00.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-25-niigata-12-horse-002023100359",
+        "finish": "10"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-2",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T09:56:27+09:00",
+      "decisionAt": "2026-10-31T01:18:44.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-2-horse-002024106751",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-3",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T09:56:27+09:00",
+      "decisionAt": "2026-10-31T01:39:30.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-3-horse-002024105832",
+        "finish": "6"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-4",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T10:55:35+09:00",
+      "decisionAt": "2026-10-31T02:17:37.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-5",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T11:46:38+09:00",
+      "decisionAt": "2026-10-31T03:08:47.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-6",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T11:46:38+09:00",
+      "decisionAt": "2026-10-31T03:14:19.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-6-horse-002023103731",
+        "finish": "4"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-7",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T12:43:39+09:00",
+      "decisionAt": "2026-10-31T04:08:08.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-7-horse-002022105864",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-8",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T13:43:30+09:00",
+      "decisionAt": "2026-10-31T04:43:30.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-8-horse-002023103365",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-9",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T13:43:30+09:00",
+      "decisionAt": "2026-10-31T05:11:28.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-9-horse-002024101709",
+        "finish": "4"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-10",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T14:39:36+09:00",
+      "decisionAt": "2026-10-31T05:54:38.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-10-horse-002022105038",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-11",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T14:39:36+09:00",
+      "decisionAt": "2026-10-31T06:09:09.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-11-horse-002022104743",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-tokyo-12",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T15:49:24+09:00",
+      "decisionAt": "2026-10-31T07:12:34.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-tokyo-12-horse-002023105238",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-1",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T09:56:27+09:00",
+      "decisionAt": "2026-10-31T01:04:07.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-1-horse-002024108132",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-2",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T09:56:27+09:00",
+      "decisionAt": "2026-10-31T01:34:38.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-2-horse-002024102197",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-3",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T10:55:35+09:00",
+      "decisionAt": "2026-10-31T02:03:02.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-3-horse-002024106991",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-4",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T10:55:35+09:00",
+      "decisionAt": "2026-10-31T02:25:45.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-4-horse-002021104830",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-5",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T11:46:38+09:00",
+      "decisionAt": "2026-10-31T03:15:22.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-6",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T12:43:39+09:00",
+      "decisionAt": "2026-10-31T03:54:07.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-7",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T12:43:39+09:00",
+      "decisionAt": "2026-10-31T04:12:42.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-7-horse-002023102761",
+        "finish": "7"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-8",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T13:43:30+09:00",
+      "decisionAt": "2026-10-31T04:59:30.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-8-horse-002023103087",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-9",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T13:43:30+09:00",
+      "decisionAt": "2026-10-31T05:12:18.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-9-horse-002023104386",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-10",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T14:39:36+09:00",
+      "decisionAt": "2026-10-31T06:07:42.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-10-horse-002023102120",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-11",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T14:39:36+09:00",
+      "decisionAt": "2026-10-31T06:10:09.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-11-horse-002024105568",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-10-31-kyoto-12",
+      "date": "2026-10-31",
+      "forecastAt": "2026-10-31T15:49:24+09:00",
+      "decisionAt": "2026-10-31T07:20:13.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-10-31-kyoto-12-horse-002022104738",
+        "finish": "7"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-2",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T10:00:20+09:00",
+      "decisionAt": "2026-11-01T01:29:46.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-2-horse-002024104556",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-3",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T10:00:20+09:00",
+      "decisionAt": "2026-11-01T01:59:38.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-3-horse-002024106226",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-4",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:00:07+09:00",
+      "decisionAt": "2026-11-01T02:28:16.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-5",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:49:15+09:00",
+      "decisionAt": "2026-11-01T03:18:27.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-6",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:49:15+09:00",
+      "decisionAt": "2026-11-01T03:18:34.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-6-horse-002023103931",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-7",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T12:51:03+09:00",
+      "decisionAt": "2026-11-01T04:17:07.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-7-horse-002022105962",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-8",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T12:51:03+09:00",
+      "decisionAt": "2026-11-01T04:20:27.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-8-horse-002023103471",
+        "finish": "3"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-9",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T13:50:44+09:00",
+      "decisionAt": "2026-11-01T05:18:08.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-9-horse-002023105106",
+        "finish": "11"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-10",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T14:45:29+09:00",
+      "decisionAt": "2026-11-01T06:00:33.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-10-horse-002023102213",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-11",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T14:45:29+09:00",
+      "decisionAt": "2026-11-01T06:13:26.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-11-horse-002022105102",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-tokyo-12",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T15:54:41+09:00",
+      "decisionAt": "2026-11-01T07:24:46.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-tokyo-12-horse-002021101106",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-2",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T10:00:20+09:00",
+      "decisionAt": "2026-11-01T01:12:13.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-2-horse-002024102997",
+        "finish": "5"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-3",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T10:00:20+09:00",
+      "decisionAt": "2026-11-01T01:40:32.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-3-horse-002024101727",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-4",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:00:07+09:00",
+      "decisionAt": "2026-11-01T02:14:59.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-4-horse-002018101010",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-5",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:49:15+09:00",
+      "decisionAt": "2026-11-01T03:03:48.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-6",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T11:49:15+09:00",
+      "decisionAt": "2026-11-01T03:20:20.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": null,
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "能力予想が保留です",
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-7",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T12:51:03+09:00",
+      "decisionAt": "2026-11-01T04:02:04.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-7-horse-002023105466",
+        "finish": "10"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-8",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T12:51:03+09:00",
+      "decisionAt": "2026-11-01T04:21:53.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-8-horse-002023107155",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-9",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T13:50:44+09:00",
+      "decisionAt": "2026-11-01T05:07:38.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-9-horse-002023104324",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-10",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T13:50:44+09:00",
+      "decisionAt": "2026-11-01T05:19:32.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-10-horse-002020104491",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-11",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T14:45:29+09:00",
+      "decisionAt": "2026-11-01T06:14:52.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-11-horse-002023103268",
+        "finish": "1"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    },
+    {
+      "id": "jra-2026-11-01-kyoto-12",
+      "date": "2026-11-01",
+      "forecastAt": "2026-11-01T15:54:41+09:00",
+      "decisionAt": "2026-11-01T07:03:19.000Z",
+      "kind": "pre-race",
+      "modelProvenance": false,
+      "baselineTop": {
+        "id": "jra-2026-11-01-kyoto-12-horse-002023110085",
+        "finish": "2"
+      },
+      "state": "skip",
+      "strategies": [
+        30
+      ],
+      "picks": [],
+      "missing": [
+        "全頭の確率校正が未検証です",
+        "全出走馬の識別・能力データ不足"
+      ],
+      "settlement": {
+        "status": "skip",
+        "cost": 0,
+        "returned": 0
+      }
+    }
+  ],
+  "adoption": {
+    "approved": false,
+    "reasons": [
+      "30戦略の閾値・効用関数は初期設定で未学習",
+      "保存予想と確率校正のモデル署名照合が必要",
+      "各券種・追い切りの時系列比較と前向き実戦検証が未完了",
+      "過去結果を使って閾値を変更していません"
+    ]
+  }
+}
