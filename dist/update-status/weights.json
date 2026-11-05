@@ -1,8 +1,8 @@
 {
   "stage": "weights",
   "date": "2026-11-05",
-  "checkedAt": "2026-11-05T13:31:00+09:00",
+  "checkedAt": "2026-11-05T14:31:55+09:00",
   "success": false,
   "error": "ValueError: Official meeting index has no readable meeting links",
-  "completedAt": "2026-11-05T13:31:06+09:00"
+  "completedAt": "2026-11-05T14:32:00+09:00"
 }
