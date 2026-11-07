@@ -1,9 +1,8 @@
 {
   "stage": "odds",
   "date": "2026-11-07",
-  "checkedAt": "2026-11-07T09:41:32+09:00",
-  "success": false,
-  "attempts": 2,
-  "error": "TimeoutExpired: Command '['/opt/hostedtoolcache/Python/3.12.16/x64/bin/python', 'scripts/import-jra-odds.py', '2026-11-07']' timed out after 178.393969093 seconds",
-  "completedAt": "2026-11-07T09:48:36+09:00"
+  "checkedAt": "2026-11-07T09:49:01+09:00",
+  "success": true,
+  "attempts": 1,
+  "completedAt": "2026-11-07T09:54:05+09:00"
 }
