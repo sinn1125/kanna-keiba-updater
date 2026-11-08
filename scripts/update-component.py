@@ -122,6 +122,10 @@ def odds_for_feed(files):
     return {rid:{'preRace':odds.get('preRace',{}).get(rid,{}),'meta':odds.get('meta',{}).get(rid,{})} for rid in ids}
 
 
+def current_odds(files):
+    return {'version':1,'checkedAt':now(),'date':u.DATE,'odds':odds_for_feed(files)}
+
+
 def now():return datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(timespec='seconds')
 
 
@@ -146,7 +150,7 @@ def publish(component, before, after, report):
         if report.get('status')!='no-meeting':
             feed=compose(files,statuses)
             changes['dist/feed.json']=(json.dumps(feed,ensure_ascii=False,separators=(',',':'))+'\n').encode()
-            current={'version':1,'checkedAt':feed['checkedAt'],'date':feed['date'],'odds':{rid:v for rid,v in odds_for_feed(files).items()}}
+            current=current_odds(files)
             changes['dist/pre-race-odds-current.json']=(json.dumps(current,ensure_ascii=False,separators=(',',':'))+'\n').encode()
             # Tiny change indicator lets clients avoid repeatedly fetching the full feed.
             metadata={'version':1,'checkedAt':feed['checkedAt'],'date':feed['date']}
