@@ -113,7 +113,13 @@ def compose(files, statuses):
             'forecastPredicted':sum(forecasts[r].get('status')=='predicted' for r in ids if r in forecasts),
             'profilesComplete':sum(h.get('historyComplete') is True for h in data['horses'] if h['raceId'] in ids)}
     return {'version':1,'checkedAt':now(),'date':u.DATE,'results':[result],'jra':data,
-            'jraOdds':odds['odds'],'jraOddsMeta':odds['meta'],'jraForecasts':forecasts}
+            'jraOdds':odds['odds'],'jraOddsMeta':odds['meta'],
+            'jraPreRaceOdds':{rid:markets for rid,markets in odds.get('preRace',{}).items() if rid in ids},'jraForecasts':forecasts}
+
+
+def odds_for_feed(files):
+    data=files['results-data.js'];odds=files['jra-odds.json'];ids={r['id'] for r in data['races'] if r['date']==u.DATE}
+    return {rid:{'preRace':odds.get('preRace',{}).get(rid,{}),'meta':odds.get('meta',{}).get(rid,{})} for rid in ids}
 
 
 def now():return datetime.datetime.now(datetime.timezone(datetime.timedelta(hours=9))).isoformat(timespec='seconds')
@@ -140,6 +146,8 @@ def publish(component, before, after, report):
         if report.get('status')!='no-meeting':
             feed=compose(files,statuses)
             changes['dist/feed.json']=(json.dumps(feed,ensure_ascii=False,separators=(',',':'))+'\n').encode()
+            current={'version':1,'checkedAt':feed['checkedAt'],'date':feed['date'],'odds':{rid:v for rid,v in odds_for_feed(files).items()}}
+            changes['dist/pre-race-odds-current.json']=(json.dumps(current,ensure_ascii=False,separators=(',',':'))+'\n').encode()
             # Tiny change indicator lets clients avoid repeatedly fetching the full feed.
             metadata={'version':1,'checkedAt':feed['checkedAt'],'date':feed['date']}
             changes['dist/update-status/latest.json']=(json.dumps(metadata,separators=(',',':'))+'\n').encode()
@@ -191,6 +199,16 @@ def main():
             if component=='results' and status.get('success'):
                 details=ROOT/'update-detail-results.json'
                 if details.exists():report.update(json.loads(details.read_text()))
+            if component=='odds' and not status.get('success'):
+                # stage() rolls back failed writes. Publish failure metadata only,
+                # preserving every previous price and pre-start observation.
+                target=u.DIST/'jra-odds.json';prices=json.loads(target.read_text())
+                entries=decode('results-data.js',(u.DIST/'results-data.js').read_bytes())
+                for race in entries['races']:
+                    if race['date']!=u.DATE:continue
+                    meta=prices['meta'].setdefault(race['id'],{})
+                    meta['markets']={t:{**meta.get('markets',{}).get(t,{}),'status':'error','checkedAt':now(),'reason':status.get('error','公式取得失敗')} for t in ('単勝','複勝','枠連','馬連','ワイド','馬単','3連複','3連単')}
+                target.write_bytes(encode('jra-odds.json',prices))
             after={n:decode(n,(u.DIST/n).read_bytes() if (u.DIST/n).exists() else None) for n in FILES}
             after['results-data.js']=restrict(component,before['results-data.js'],after['results-data.js'])
             if component=='odds':sync_single_odds(after['results-data.js'],after['jra-odds.json'])
