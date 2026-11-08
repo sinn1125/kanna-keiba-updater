@@ -1,4 +1,6 @@
 import ast
+import hashlib
+import json
 import datetime
 import unittest
 from pathlib import Path
@@ -7,7 +9,7 @@ from pathlib import Path
 source=Path(__file__).resolve().parents[1]/'scripts/import-jra-odds.py'
 tree=ast.parse(source.read_text())
 fn=next(n for n in tree.body if isinstance(n,ast.FunctionDef) and n.name=='remember_pre_start')
-env={'datetime':datetime.datetime,'JST':datetime.timezone(datetime.timedelta(hours=9))}
+env={'hashlib':hashlib,'json':json,'datetime':datetime.datetime,'JST':datetime.timezone(datetime.timedelta(hours=9))}
 exec(compile(ast.Module(body=[fn],type_ignores=[]),str(source),'exec'),env)
 remember=env['remember_pre_start']
 URL='https://www.jra.go.jp/JRADB/accessO.html?CNAME=pw151ou-test'
