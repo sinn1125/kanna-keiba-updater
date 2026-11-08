@@ -144,6 +144,9 @@ def remember_pre_start(old, race, rid, values, meta):
         previous=markets.get(typ,{})
         if previous.get('observedAt','')>=meta['fetchedAt']:
             continue
+        if previous.get('observedAt') and previous.get('odds'):
+            prior_digest=hashlib.sha256(json.dumps(previous,sort_keys=True,separators=(',',':')).encode()).hexdigest()
+            old.setdefault('preRaceHistory',{}).setdefault(rid,{}).setdefault(typ,{})[prior_digest]=dict(previous)
         markets[typ]={'observedAt':observed_at,'odds':priced,
                       'source':source,'coverage':meta.get('coverage',{}).get(typ,'official-listed')}
         snapshot=markets[typ]
