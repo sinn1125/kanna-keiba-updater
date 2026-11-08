@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-11-08",
-  "checkedAt": "2026-11-08T10:03:12+09:00",
+  "checkedAt": "2026-11-08T10:05:12+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -48,7 +48,8 @@
   ],
   "failedRaces": [],
   "officialUrls": [
+    "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202605020120261108%2FCF",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0103202603020120261108%2FD9"
   ],
-  "completedAt": "2026-11-08T10:03:23+09:00"
+  "completedAt": "2026-11-08T10:05:23+09:00"
 }
