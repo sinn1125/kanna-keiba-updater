@@ -1,7 +1,7 @@
 {
   "stage": "results",
   "date": "2026-11-08",
-  "checkedAt": "2026-11-08T10:07:12+09:00",
+  "checkedAt": "2026-11-08T10:09:12+09:00",
   "success": true,
   "attempts": 1,
   "status": "partial",
@@ -9,9 +9,7 @@
     "jra-2026-11-08-tokyo-1",
     "jra-2026-11-08-fukushima-1"
   ],
-  "newlyConfirmedRaces": [
-    "jra-2026-11-08-tokyo-1"
-  ],
+  "newlyConfirmedRaces": [],
   "pendingRaces": [
     "jra-2026-11-08-tokyo-2",
     "jra-2026-11-08-tokyo-3",
@@ -53,5 +51,5 @@
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0105202605020120261108%2FCF",
     "https://www.jra.go.jp/JRADB/accessS.html?CNAME=pw01sde0103202603020120261108%2FD9"
   ],
-  "completedAt": "2026-11-08T10:07:23+09:00"
+  "completedAt": "2026-11-08T10:09:23+09:00"
 }
