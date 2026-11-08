@@ -169,6 +169,19 @@ def run_main():
     results=ROOT/'dist/results-data.js'
     published=json.loads(results.read_text().split('=',1)[1].rstrip(';\n')) if results.exists() else {'races':[]}
     race_index={r['id']:r for r in published['races'] if r['date']==date}
+    # Bound one cycle, rotating by oldest successful observation. No new timer.
+    now=datetime.now(JST)
+    code_venues={str(i+1).zfill(2):VENUES[v] for i,v in enumerate(p.VENUES)}
+    def job_id(cn):
+        m=re.search(r'(\d{2})'+date[:4]+r'\d{4}(\d{2})'+date.replace('-',''),cn)
+        return f'jra-{date}-{code_venues[m[1]]}-{int(m[2])}' if m and m[1] in code_venues else None
+    def before_start(r):
+        try:return r.get('status')=='entries' and now<datetime.fromisoformat(date+'T'+r['startTime']).replace(tzinfo=JST)
+        except (KeyError,ValueError):return False
+    jobs=[cn for cn in jobs if job_id(cn) in race_index and before_start(race_index[job_id(cn)])]
+    jobs.sort(key=lambda cn:(old.get('meta',{}).get(job_id(cn),{}).get('fetchedAt',''),race_index[job_id(cn)]['startTime']))
+    jobs=jobs[:max(1,min(8,int(os.environ.get('JRA_ODDS_MAX_RACES','8'))))]
+    attempted_ids={job_id(cn) for cn in jobs}
     count, errors, seen = 0, [], set()
     def safe_read(cn):
         try:return read_race(cn,date)
@@ -194,7 +207,7 @@ def run_main():
                         prior=prior_meta.get('markets',{}).get(typ,{})
                         if prior.get('observedAt'): state['observedAt']=prior['observedAt']
                 old['meta'][rid] = meta
-    for rid in race_index.keys()-seen:
+    for rid in attempted_ids-seen:
         prior=old['meta'].setdefault(rid,{})
         prior['markets']={t:{**prior.get('markets',{}).get(t,{}),'status':'error' if errors else 'unpublished','checkedAt':datetime.now(JST).isoformat(timespec='seconds'),'reason':'公式レースページ取得失敗' if errors else '公式オッズリンク未掲載'} for t in ('単勝','複勝',*[v[0] for v in TYPES.values()])}
     with tempfile.NamedTemporaryFile('w',dir=target.parent,delete=False) as f:
