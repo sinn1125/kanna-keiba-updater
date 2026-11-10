@@ -82,7 +82,7 @@ def predict(info, target, hs):
     rid=f"{info['date']}|{info['course']}|{info['number']}"
     surface='障害' if '障害' in info.get('surface','') else 'ダート' if 'ダート' in info.get('surface','') else '芝'
     r={'id':rid,'date':info['date'],'course':info['course'],'number':info['number'],'name':info['name'],
-       'weather':info.get('weather',''),'going':info.get('going'),'distance':int(info['distance']),'surface':surface,'route':info.get('track',''),
+       'weather':info.get('weather',''),'going':info.get('going') if info.get('goingStatus', 'confirmed') == 'confirmed' else None,'distance':int(info['distance']),'surface':surface,'route':info.get('track',''),
        'grade':grade(str(info.get('grade',''))+' '+info.get('className','')),'field':len(hs),'runners':[]}
     for h in hs:
         m=re.search(r'pw01dud(\d{11,13})/',h.get('horseCname',''))
