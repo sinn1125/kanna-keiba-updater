@@ -15,6 +15,11 @@ class GoingTests(unittest.TestCase):
         self.assertIsNone(m.normalize_going('芝：良','ダート'))
         self.assertEqual(m.normalize_going('重','ダート'),'重')
 
+    def test_official_header_variants(self):
+        self.assertEqual(m.normalize_going('天候：晴 芝：良 ダート：稍重', 'ダート'), '稍重')
+        self.assertEqual(m.normalize_going('ダート：不良 芝：重', '芝'), '重')
+        self.assertIsNone(m.normalize_going('天候：曇', 'ダート'))
+
     def environment(self):
         races={};rows=[]
         for i in range(8):
