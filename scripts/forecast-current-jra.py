@@ -9,6 +9,7 @@ import bisect
 from collections import Counter, defaultdict
 from datetime import datetime, timezone, timedelta
 import gzip
+import hashlib
 import json
 import math
 from pathlib import Path
@@ -147,6 +148,9 @@ for r in targets:
         # validation, but it was not a saved pre-post-time forecast.
         forecast['forecastKind']='retrospective'
     else:forecast['forecastKind']='pre-race'
+    forecast['modelVersion']=current.get('version')
+    forecast['modelSignature']=hashlib.sha256(json.dumps(current['models'][forecast['group']],sort_keys=True,separators=(',',':')).encode()).hexdigest()
+    forecast['featureVersion']=current['models'][forecast['group']].get('featureVersion','legacy')
     forecast['forecastGeneratedAt']=datetime.now(timezone(timedelta(hours=9))).isoformat(timespec='seconds')
     current['races'][r['id']]=forecast
     if missing:print('WITHHELD',r['id'],len(missing),flush=True)
