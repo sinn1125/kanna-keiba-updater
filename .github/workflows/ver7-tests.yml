@@ -1,0 +1,21 @@
+name: Ver7 development tests
+on:
+  pull_request:
+    paths: ['site-overlay/**', 'tests/strategy-v7*.cjs', 'scripts/*ver7*', 'scripts/evaluate-strategy-v7.cjs', '.github/workflows/ver7-tests.yml']
+  workflow_dispatch:
+permissions:
+  contents: read
+jobs:
+  candidate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.12'
+      - run: node tests/strategy-v7.cjs
+      - run: node tests/strategy-v7-integration.cjs
+      - run: python -m unittest discover -s tests
