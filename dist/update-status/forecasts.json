@@ -1,9 +1,8 @@
 {
   "stage": "forecasts",
   "date": "2026-11-21",
-  "checkedAt": "2026-11-21T01:54:51+09:00",
-  "success": false,
-  "attempts": 2,
-  "error": "CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.12.16/x64/bin/python', 'scripts/forecast-current-jra.py', '2026-11-21']' returned non-zero exit status 1.",
-  "completedAt": "2026-11-21T01:55:22+09:00"
+  "checkedAt": "2026-11-21T14:42:31+09:00",
+  "success": true,
+  "attempts": 1,
+  "completedAt": "2026-11-21T14:42:58+09:00"
 }
