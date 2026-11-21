@@ -1,8 +1,9 @@
 {
   "stage": "forecasts",
   "date": "2026-11-22",
-  "checkedAt": "2026-11-22T00:16:06+09:00",
+  "checkedAt": "2026-11-22T01:04:38+09:00",
   "success": false,
-  "error": "ValueError: No official entries yet; this component will retry independently next run",
-  "completedAt": "2026-11-22T00:16:23+09:00"
+  "attempts": 2,
+  "error": "CalledProcessError: Command '['/opt/hostedtoolcache/Python/3.12.16/x64/bin/python', 'scripts/forecast-current-jra.py', '2026-11-22']' returned non-zero exit status 1.",
+  "completedAt": "2026-11-22T01:05:11+09:00"
 }
