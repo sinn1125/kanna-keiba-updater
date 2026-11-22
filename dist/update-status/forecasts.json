@@ -1,8 +1,8 @@
 {
   "stage": "forecasts",
-  "date": "2026-11-22",
-  "checkedAt": "2026-11-22T15:33:02+09:00",
-  "success": true,
-  "attempts": 1,
-  "completedAt": "2026-11-22T15:33:29+09:00"
+  "date": "2026-11-23",
+  "checkedAt": "2026-11-23T01:10:51+09:00",
+  "success": false,
+  "error": "ValueError: No official entries yet; this component will retry independently next run",
+  "completedAt": "2026-11-23T01:11:07+09:00"
 }
