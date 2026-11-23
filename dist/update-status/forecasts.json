@@ -1,8 +1,8 @@
 {
   "stage": "forecasts",
-  "date": "2026-11-23",
-  "checkedAt": "2026-11-23T16:23:09+09:00",
+  "date": "2026-11-24",
+  "checkedAt": "2026-11-24T04:27:05+09:00",
   "success": true,
-  "attempts": 1,
-  "completedAt": "2026-11-23T16:23:38+09:00"
+  "status": "no-meeting",
+  "completedAt": "2026-11-24T04:27:15+09:00"
 }
