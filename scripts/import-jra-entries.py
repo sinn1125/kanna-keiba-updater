@@ -17,6 +17,9 @@ ROOT = Path(__file__).resolve().parents[1]
 spec = importlib.util.spec_from_file_location("profiles", ROOT / "scripts/import-profiles.py")
 profiles = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(profiles)
+condition_spec = importlib.util.spec_from_file_location("track_condition", ROOT / "scripts/track-condition.py")
+track_condition = importlib.util.module_from_spec(condition_spec)
+condition_spec.loader.exec_module(track_condition)
 VENUE_CODES = dict(zip(profiles.VENUES, ["sapporo", "hakodate", "fukushima", "niigata", "tokyo", "nakayama", "chukyo", "kyoto", "hanshin", "kokura"]))
 LINK = re.compile(r"doAction\('/JRADB/accessD.html',\s*'([^']+)'\)")
 
@@ -56,6 +59,9 @@ def parse_meeting(label, cname):
         distance = re.search(r"([\d,]+)メートル", course)
         name = caption.first("span", "race_name").text() or caption.first("span", "main").text()
         entry_rows = [row for row in t.all("tr") if cell(row, "horse").text()]
+        official_weather = caption.first("div", "baba").text()
+        surface_kind = "障害" if "障害" in course else "ダート" if "ダート" in course else "芝"
+        official_going = track_condition.normalize_going(official_weather, surface_kind)
         race = {"id": rid, "date": date, "course": venue, "meeting": re.search(r"(\d+回" + venue + r"\d+日)", date_line)[1],
                 "number": number, "name": name, "distance": distance[1].replace(",", "") if distance else "",
                 "surface": course, "track": course.split("（")[-1].rstrip("）") if "（" in course else "",
@@ -63,7 +69,8 @@ def parse_meeting(label, cname):
                 "startTime": f"{int(start[1]):02}:{int(start[2]):02}" if start else "",
                 "category": caption.first("div", "category").text(), "className": caption.first("div", "class").text(),
                 "rule": caption.first("div", "rule").text(), "grade": "", "field": len(entry_rows),
-                "weather": caption.first("div", "baba").text(),
+                "weather": official_weather, "going": official_going,
+                "goingStatus": "confirmed" if official_going else "unconfirmed",
                 "registeredField": len(entry_rows), "status": "entries", "source": "JRA公式出馬表", "fetchedAt": fetched}
         if not name or not entry_rows:
             raise ValueError(f"{rid}: missing race name or entries")
@@ -160,6 +167,10 @@ def main():
             continue
         if all(old.get(k) == v for k, v in r.items() if k != "fetchedAt"):
             r["fetchedAt"] = old.get("fetchedAt", r["fetchedAt"])
+        # Retain the last confirmed value without misrepresenting it as fresh.
+        if r["goingStatus"] == "unconfirmed" and old.get("goingStatus") in ("confirmed", "retained"):
+            r["going"] = old.get("going")
+            r["goingStatus"] = "retained"
         old_races[r["id"]] = {**old, **r}
     for h in fresh_horses:
         old = old_horses.get(h["id"], {})
