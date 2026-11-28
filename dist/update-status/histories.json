@@ -1,8 +1,8 @@
 {
   "stage": "histories",
-  "date": "2026-11-27",
-  "checkedAt": "2026-11-27T17:09:59+09:00",
-  "success": true,
-  "status": "no-meeting",
-  "completedAt": "2026-11-27T17:10:10+09:00"
+  "date": "2026-11-29",
+  "checkedAt": "2026-11-29T01:22:19+09:00",
+  "success": false,
+  "error": "ValueError: No official entries yet; this component will retry independently next run",
+  "completedAt": "2026-11-29T01:22:41+09:00"
 }
